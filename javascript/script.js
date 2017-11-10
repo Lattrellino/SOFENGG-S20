@@ -31,8 +31,14 @@ function loadCalendar(){
     }
 
     for(var dayCounter = 1; dayCounter <= currMonthDays; dayCounter++){
+        
         tempListItem = document.createElement("li");
         tempListItem.innerHTML = dayCounter;
+        
+        if(dayCounter == currDay){
+            tempListItem.style.backgroundColor = "skyblue";
+            tempListItem.style.color = "aliceblue";
+        }
 
         ulDays.appendChild(tempListItem);
     }
