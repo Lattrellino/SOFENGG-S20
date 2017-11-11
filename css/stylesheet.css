@@ -22,18 +22,17 @@ a {
     text-decoration: none;
 }
 
-span {
-    font-size: 120%;
-    margin: 2%;
-    color: black;
-    text-decoration: bold;
-}
-
 select {
     width: 250px;
     padding: 5px;
     margin: 5px;
 }
+
+section {
+    display: flex;
+}
+
+/*********** Background CSS ***********/
 
 .bg-image{
     position: fixed; 
@@ -73,6 +72,8 @@ select {
     text-align: center;
     text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
 }
+
+/*********** Log In Screen CSS ***********/
 
 .home-input {
     vertical-align: middle;
@@ -117,6 +118,17 @@ select {
 
 /* DIV that contains place dropwdown and calendar */
 
+.right-sidebar {
+    position: relative;
+    width: auto;
+    height: inherit;
+    align-content: center;
+    display: inline-block;
+    margin: 1%;  
+}
+
+/* DIV that contains place dropwdown and calendar */
+
 .left-sidebar{
     position: relative;
     width: 30%;
@@ -129,6 +141,8 @@ select {
 .place-dropdown{
     margin: 0;
     position: relative;
+    width: 100%;
+
 }
 
 /* Calendar container */
@@ -148,7 +162,7 @@ ul {
 /* Month header */
 .month {
     padding: 10px 10px;
-    background: #1abc9c;
+    background: #195d00;
     text-align: center;
     font-size: 10%;
 }
@@ -164,6 +178,7 @@ ul {
     font-size: 15px;
     text-transform: uppercase;
     letter-spacing: 3px;
+    cursor: pointer;
 }
 
 /* Previous month */
@@ -236,4 +251,44 @@ ul {
     text-transform: uppercase;
     letter-spacing: 3px;
     text-align: center;
+}
+
+/*********** PC Details Table CSS ***********/
+
+table {
+    background-color: white;
+}
+
+
+td {
+    padding: 0.7%;
+    text-align: center;
+}
+
+.reserved-pc {
+    background-color: firebrick;
+}
+
+.available-pc {
+    background-color: green;
+}
+
+.unavailable-pc {
+    background-color: dimgray;
+}
+
+.legend {
+margin: 1%;
+
+}
+
+.legend-table {
+    padding: 1%;
+    text-align: left;
+    background-color: transparent;
+    border: none;
+}
+
+.legend-table > td{
+    width: 100px;
 }

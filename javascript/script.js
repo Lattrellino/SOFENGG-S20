@@ -45,10 +45,6 @@ function loadCalendar(){
 
 }
 
-function getSpecificDate(month, year, date){
-    return new Date(year, month, date).getDate();    
-}
-
 $(document).ready(function(){
     date = new Date();
     getCurrentDate();
@@ -101,5 +97,9 @@ $(document).ready(function(){
         }
 
         loadCalendar();
+    });
+    
+    $("#month-name").on("click", function(){
+       /* insert code pag ni-click ni user yung month name, it zooms out and shows all months for that year */ 
     });
 });
