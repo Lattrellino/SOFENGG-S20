@@ -11,6 +11,7 @@ function getCurrentDate() {
 }
 
 function loadCalendar(){
+
     var divMonth = document.getElementById("month-name");
     var ulDays = document.getElementById("days");
     var spanYear = document.getElementById("year");
@@ -21,9 +22,6 @@ function loadCalendar(){
 
     divMonth.innerHTML = months[currMonth];
     spanYear.innerHTML = currFullYear;
-    
-    
-    console.log(currMonth+1 + " / " + currFullYear + " (" + firstDay + ") ");
 
     for(var firstDayCounter = 0; firstDayCounter < firstDay; firstDayCounter++){
         tempListItem = document.createElement("li");
@@ -35,9 +33,8 @@ function loadCalendar(){
         tempListItem = document.createElement("li");
         tempListItem.innerHTML = dayCounter;
         
-        if(dayCounter == currDay){
-            tempListItem.style.backgroundColor = "skyblue";
-            tempListItem.style.color = "aliceblue";
+        if(dayCounter == date.getDate() && currMonth == date.getMonth()){
+            tempListItem.setAttribute("id", "current-day");
         }
 
         ulDays.appendChild(tempListItem);
