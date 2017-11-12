@@ -2,6 +2,8 @@ var currDay, currMonth, currYear, date;
 
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
 function getCurrentDate() {
     currDay = date.getDate();
     currMonth = date.getMonth();
@@ -42,8 +44,28 @@ function loadCalendar(){
 
 }
 
-$(document).ready(function(){
+function initializeTopBar(){
+    var liDate = document.getElementById("nav-date");
+    liDate.innerHTML = months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
+    
+    var liTime = document.getElementById("nav-time");
+    
+    if(date.getHours() > 12){
+        liTime.innerHTML = (date.getHours()+11)%12+1 + ":" + date.getMinutes() + " pm";
+    } else {
+        liTime.innerHTML = date.getHours() + ": " + date.getMinutes() + " am";
+    }
+    
+}
+
+function refreshTimer(){
+    /* some code refreshing the timer sa nav bar */
+}
+
+$(document).ready(function(){    
     date = new Date();
+    
+    initializeTopBar();
     getCurrentDate();
     loadCalendar();
 

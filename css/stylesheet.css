@@ -10,8 +10,8 @@ body, html{
 h1 {
     text-align: center;
     vertical-align: middle;
-    font-size: 400%;
-    margin-top: 1%;
+    font-size: 250%;
+    margin-top: 3.5%;
     color: darkgreen;
     text-shadow: 3px 3px 0px rgba(0,0,0,0.2);
     letter-spacing: 4pt;
@@ -112,8 +112,6 @@ section {
     color: aliceblue;
     background-color: #009dff;
     cursor: pointer;
-    /*    box-shadow: 0 3px x 0 rgba(0,0,0,0.24), 0 4px 4px 0 rgba(0,0,0,0.19);*/
-    /*    box-shadow: inset 2px 2px 1px 0px rgba(0,0,0,0.2);*/
 }
 
 /* DIV that contains place dropwdown and calendar */
@@ -142,7 +140,26 @@ section {
     margin: 0;
     position: relative;
     width: 100%;
+}
 
+.navbar li {
+    display: inline-flex;
+    margin-right: 10px;
+    color: white
+}
+
+.navbar span {
+    color: darkgray;
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.navbar {
+    background: black;
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
 }
 
 /* Calendar container */
