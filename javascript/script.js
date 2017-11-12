@@ -8,8 +8,8 @@ function getCurrentDate() {
     currDay = date.getDate();
     currMonth = date.getMonth();
     currFullYear = date.getFullYear();
-//    currYear = date.getYear();
-//    console.log(day + "/" + month + "/" + year);
+    //    currYear = date.getYear();
+    //    console.log(day + "/" + month + "/" + year);
 }
 
 function loadCalendar(){
@@ -31,10 +31,10 @@ function loadCalendar(){
     }
 
     for(var dayCounter = 1; dayCounter <= currMonthDays; dayCounter++){
-        
+
         tempListItem = document.createElement("li");
         tempListItem.innerHTML = dayCounter;
-        
+
         if(dayCounter == date.getDate() && currMonth == date.getMonth()){
             tempListItem.setAttribute("id", "current-day");
         }
@@ -47,15 +47,30 @@ function loadCalendar(){
 function initializeTopBar(){
     var liDate = document.getElementById("nav-date");
     liDate.innerHTML = months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
-    
+
     var liTime = document.getElementById("nav-time");
-    
-    if(date.getHours() > 12){
-        liTime.innerHTML = (date.getHours()+11)%12+1 + ":" + date.getMinutes() + " pm";
-    } else {
-        liTime.innerHTML = date.getHours() + ": " + date.getMinutes() + " am";
+
+    var currMin = date.getMinutes();
+    var currHour = date.getHours();
+    var time = "am";
+
+    if(currMin < 10){
+        currMin = "0" + currMin;
     }
     
+    if(currHour > 12){ 
+        currHour = (currHour+11)%12+1;
+        time = "pm";
+    } else {
+        currHour = "0" + currHour;
+    }
+    
+    if(currHour < 10 && currHour.charAt(0) != '0'){
+        currHour = "0" + currHour;
+    }
+
+    liTime.innerHTML = currHour + ":" + currMin + time;
+
 }
 
 function refreshTimer(){
@@ -64,7 +79,7 @@ function refreshTimer(){
 
 $(document).ready(function(){    
     date = new Date();
-    
+
     initializeTopBar();
     getCurrentDate();
     loadCalendar();
@@ -101,7 +116,7 @@ $(document).ready(function(){
 
     $("#next-month").on("click", function(){
         console.log("next month");
-        
+
         if(currMonth+1 < 12){
             currMonth++;
         } else {
@@ -117,8 +132,8 @@ $(document).ready(function(){
 
         loadCalendar();
     });
-    
+
     $("#month-name").on("click", function(){
-       /* insert code pag ni-click ni user yung month name, it zooms out and shows all months for that year */ 
+        /* insert code pag ni-click ni user yung month name, it zooms out and shows all months for that year */ 
     });
 });

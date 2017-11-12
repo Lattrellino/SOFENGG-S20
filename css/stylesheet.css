@@ -11,7 +11,7 @@ h1 {
     text-align: center;
     vertical-align: middle;
     font-size: 250%;
-    margin-top: 3.5%;
+    margin-top: 3.8%;
     color: darkgreen;
     text-shadow: 3px 3px 0px rgba(0,0,0,0.2);
     letter-spacing: 4pt;
@@ -114,6 +114,9 @@ section {
     cursor: pointer;
 }
 
+
+/*********** Home Screen/PC Reservation Screen CSS ***********/
+
 /* DIV that contains place dropwdown and calendar */
 
 .right-sidebar {
@@ -142,25 +145,59 @@ section {
     width: 100%;
 }
 
-.navbar li {
-    display: inline-flex;
-    margin-right: 10px;
-    color: white
-}
-
-.navbar span {
-    color: darkgray;
-    margin-right: 10px;
-    font-size: 20px;
-}
-
 .navbar {
     background: black;
     position: fixed;
     top:0;
     left:0;
     width: 100%;
+    cursor:default;
 }
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: black;
+}
+
+.navbar li {
+    display: inline-block;
+    margin-right: 10px;
+    color: white;
+}
+
+.navbar li a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: ease .5s;
+}
+
+.navbar span {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 10px 5px;
+    text-decoration: none;
+}
+
+/*
+#logout-button {
+    transition: ease .5s;
+}
+*/
+
+#logout-button:hover a {
+    cursor: pointer;
+/*    background-color: rgba(0, 177, 255, 0.46);*/
+    color: rgba(0, 177, 255, 1);
+}
+
+/*********** Left Sidebar CSS ***********/
 
 /* Calendar container */
 
@@ -256,7 +293,6 @@ ul {
     color:#777;
 
 }
-
 
 #current-day{
     background-color: rgba(0, 177, 255, 0.46);
