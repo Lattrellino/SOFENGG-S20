@@ -4,23 +4,17 @@
         src="http://code.jquery.com/jquery-3.2.1.js"
         integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
         crossorigin="anonymous"></script>
-        <script>
-        function updateClock() {
-            var now = new Date(), // current date
-                months = ['January', 'February', '...']; // you get the idea
-                time = now.getHours() + ':' + now.getMinutes(), // again, you get the idea
-
-                // a cleaner way than string concatenation
-                date = [now.getDate(), 
-                        months[now.getMonth()],
-                        now.getFullYear()].join(' ');
-
-            // set the content of the element with the ID time to the formatted string
-            document.getElementById('time').innerHTML = [date, time].join(' / ');
-
-            // call this function again in 1000ms
-            setTimeout(updateClock, 1000);
-        }
-</script>
-<div id="time"><script type="text/javascript">document.write(updateClock());</script> </div>
+		<script>
+			function updateClock() 
+			{
+			 var now = new Date();
+			 var time = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds(); 
+			 console.log(time);
+			 document.getElementById('nav-time').innerHTML = time;   
+				
+			}
+		setInterval(updateClock, 1000);
+		</script>
+<li><span id="nav-time">
+<span class="divider"> <script>document.write(updateClock());</script> </span>
 </html>
