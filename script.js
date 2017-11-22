@@ -125,8 +125,9 @@ $(document).ready(function(){
     {
     	var date = $(this).children(".hidden").text();
     	console.log(date);
-    	$(document.getElementById("current-day")).removeAttr("#current-day");
+    	$(document.getElementById("current-day")).removeAttr("id");
     	$(this).attr("id", "current-day");
+    	//TODO add form logic here for the date.
     });
     $("#next-month").on("click", function(){
         console.log("next month");
