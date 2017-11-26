@@ -1,0 +1,364 @@
+@font-face {
+    font-family: Gravity;
+    src: url('../media/Gravity-Regular.otf');
+}
+
+body, html{
+    font-family: Gravity;
+}
+
+h1 {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 250%;
+    margin-top: 3.8%;
+    color: darkgreen;
+    text-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+    letter-spacing: 4pt;
+    text-decoration: bold;
+}
+
+a {
+    text-decoration: none;
+}
+
+select {
+    width: 250px;
+    padding: 5px;
+    margin: 5px;
+}
+
+section {
+    display: flex;
+}
+
+/*********** Background CSS ***********/
+
+.bg-image{
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    background-image: url('../media/IMG_6549.JPG');
+    height: 100%;
+    width: 100%;    
+    background-size: cover;
+    z-index: -1;
+}
+
+.tint {
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-image: linear-gradient(180deg, rgba(245, 247, 250, 0.85) 0%, rgba(195, 207, 226, 0.85) 100%); 
+}
+
+.black-tint {
+    z-index: 2;
+    height: 70%;
+    width: 100%;
+    position: fixed;
+    top: 15%;
+    left: 0px;
+    background: rgba(0, 0, 0, .24);    
+}
+
+.black-tint > p {
+    color: white;
+    font-size: 20pt;
+    margin: 3%;
+    text-align: center;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+}
+
+/*********** Log In Screen CSS ***********/
+
+.home-input {
+    vertical-align: middle;
+    padding: 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    border-style: hidden;
+}
+
+.text-input {
+    display: block;
+    margin-bottom: 5%;
+    font-size: 20pt;
+    border-radius: 5px;
+    border-style: hidden;
+    box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.25);
+}
+
+.button {
+    border-radius: 5px;
+    color: white;
+    font-size: 20px;
+    background-color: darkgreen;
+    border-style: hidden;
+    padding: 10px 20px 10px 20px;
+    box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.20);
+    transition: ease .5s;
+    outline: none;
+}
+
+.button:hover {
+    color: aliceblue;
+    background-color: #009dff;
+    cursor: pointer;
+}
+
+
+/*********** Home Screen/PC Reservation Screen CSS ***********/
+
+/* DIV that contains place dropwdown and calendar */
+
+.right-sidebar {
+    position: relative;
+    width: auto;
+    height: inherit;
+    align-content: center;
+    display: inline-block;
+    margin: 1%;  
+}
+
+/* DIV that contains place dropwdown and calendar */
+
+.left-sidebar{
+    position: relative;
+    width: 75%;
+    height: inherit;
+    align-content: center;
+    display: inline-block;
+    margin: 1%;
+}
+
+.place-dropdown{
+    margin: 0;
+    position: relative;
+    width: 100%;
+}
+
+.navbar {
+    background: black;
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    cursor:default;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: black;
+}
+
+.navbar li {
+    display: inline-block;
+    margin-right: 10px;
+    color: white;
+}
+
+.navbar li a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: ease .5s;
+}
+
+.navbar span {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 10px 5px;
+    text-decoration: none;
+}
+
+/*
+#logout-button {
+    transition: ease .5s;
+}
+*/
+
+#logout-button:hover a {
+    cursor: pointer;
+/*    background-color: rgba(0, 177, 255, 0.46);*/
+    color: rgba(0, 177, 255, 1);
+}
+
+/*********** Left Sidebar CSS ***********/
+
+/* Calendar container */
+
+.calendar-container {
+    background-color: white;
+    align-items: center;
+    margin-top: 2%
+}
+
+/*********** Calendar CSS ***********/
+
+ul {
+    list-style-type: none;
+}
+
+/* Month header */
+.month {
+    padding: 10px 10px;
+    background: #195d00;
+    text-align: center;
+    font-size: 10%;
+}
+
+/* Month list */
+.month ul {
+    margin: 0;
+    padding: 0;
+}
+
+.month ul li {
+    color: white;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    cursor: pointer;
+}
+
+/* Previous month */
+#prev-month {
+    float: left;
+    padding-left: 2px;
+    padding-bottom: 2px;
+    cursor: pointer;
+}
+
+#prev-month:hover{
+    background-color: gray;
+}
+
+/* Next button */
+#next-month {
+    float: right;
+    padding-left: 2px;
+    padding-bottom: 2px;
+    cursor: pointer;
+}
+
+#next-month:hover{
+    background-color: gray;
+}
+
+/* Weekdays (Mon-Sun) */
+.weekdays {
+    margin: 0;
+    padding: 2px 2px;
+    background-color:#ddd;
+    font-size: 88%;
+
+}
+
+.weekdays li {
+    display: inline-block;
+    width: 13%;
+    color: #666;
+    text-align: center;
+}
+
+/* Days (1-31) */
+#days {
+    padding: 8px 0;
+    background: #eee;
+    margin: 0;
+    cursor: pointer;
+}
+
+#days li {
+    list-style-type: none;
+    display: inline-block;
+    width: 13.6%;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size:12px;
+    color:#777;
+
+}
+.day{
+	
+}
+
+.hidden {
+	display:none;
+}
+#current-day{
+    background-color: rgba(0, 177, 255, 0.46);
+    color: white !important;
+}
+
+#year {
+    color: white;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-align: center;
+}
+
+/*********** PC Details Table CSS ***********/
+
+table {
+    background-color: white;
+}
+
+
+td {
+    padding: 0.7%;
+    text-align: center;
+}
+
+.reserved-pc {
+    background-color: firebrick;
+}
+
+.available-pc {
+    background-color: green;
+	
+}
+.available-pc:hover {
+	cursor: pointer;
+}
+
+.unavailable-pc {
+    background-color: dimgray;
+}
+
+.legend {
+    margin-top: 10px;
+    padding: 1%;
+    width: 20%;
+    border: 1px solid gray;
+    background-color: rgba(255,255,255,0.3);
+}
+
+.legend-table {
+    text-align: left;
+    background-color: transparent;
+    width: auto;
+    height: auto
+}
+
+.legend-td {
+    text-align: left;
+    margin: 1%;
+    padding: 2%;
+    width: 3%;
+}
