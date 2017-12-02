@@ -98,6 +98,10 @@
 					
 					</FORM>
                     <button id = "submit_button"> RESERVE </button>
+                    <FORM ACTION="/sofengg/Admin_Controller" METHOD="post" name = "edit-form" id = "edit-form">
+					
+					</FORM>
+					<button id = "edit_button"> EDIT </button>
                 </div>
 
             </section>
@@ -139,7 +143,7 @@
 											<td class="available-pc"><p class = "hidden">${pcloop.index + 1}|${loop.index + 7}0000</p></td>
 										</c:when>
 										<c:otherwise>
-											<td class="reserved-pc"> </td>
+											<td class="reserved-pc"><p class = "hidden">${pcloop.index + 1}|${loop.index + 7}0000</p> </td>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
