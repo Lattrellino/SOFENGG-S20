@@ -79,6 +79,7 @@ public class Database {
 
 	}
 	
+	
 	public static log_database getLog(int id) {
 		log_database logDB = null;
 		EntityManager em = emf.createEntityManager();
@@ -319,11 +320,24 @@ public class Database {
 	public static void reserveSlot(String pcNo, String Date, String Time, String UserID) {
 		// TODO Auto-generated method stub
 		EntityManager em = emf.createEntityManager();
-		String dummy = "09:00:00";
 		System.out.println(pcNo + "|" + Date +"|" + Time + "|" + UserID);
 		EntityTransaction et = em.getTransaction();
 		et.begin();
-		em.createNativeQuery("INSERT INTO log (pc_no,date,time,user_id)" + "VALUES (" + pcNo + "," + Date + "," + Time + "," + UserID +")").executeUpdate();
+		em.createNativeQuery("INSERT INTO log (pc_no,date,time,user_id) " + "VALUES (" + pcNo + "," + Date + "," + Time + "," + UserID +")").executeUpdate();
+		et.commit();
+	}
+	
+	public static void removeLog(String pcNo, String Date, String Time, String UserID) //you can only remove a reserved slot so instead of editing anything just remove it so he can book again
+	{
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		em.createNativeQuery("DELETE FROM log " +
+				"WHERE pc_no" +  " = '" + pcNo + "'" + 
+				" AND date = '" + Date + "'" + 
+				" AND time = '" + Time + "'" + 
+				" AND user_id = '" + UserID + "'"
+				).executeUpdate();
 		et.commit();
 	}
 	
