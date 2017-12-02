@@ -40,7 +40,10 @@ function loadCalendar(){
         tempListItem.innerHTML = dayCounter;
         
         //add a hidden element to the day that we can access when we click on it
-        var temp =  currFullYear + "" + (currMonth + 1) + "" + dayCounter;
+        var day = dayCounter;
+        if (day < 10)
+        	day = "0" + dayCounter;
+        var temp =  currFullYear + "" + (currMonth + 1) + "" + day;
         $(tempListItem).append("<div class = 'hidden'>" + temp + "</div>");
         
         if(dayCounter < date.getDate() && currMonth == date.getMonth()){
