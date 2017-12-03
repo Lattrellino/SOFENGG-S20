@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html>
+        <script
+        src="http://code.jquery.com/jquery-3.2.1.js"
+        integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+        crossorigin="anonymous"></script>
+		<script>
+			function updateClock() 
+			{
+			 var now = new Date();
+			 var time = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds(); 
+			 console.log(time);
+			 document.getElementById('nav-time').innerHTML = time;   
+				
+			}
+		setInterval(updateClock, 1000);
+		</script>
+<li><span id="nav-time">
+<span class="divider"> <script>document.write(updateClock());</script> </span>
+</html>
