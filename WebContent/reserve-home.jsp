@@ -6,7 +6,7 @@
 
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>MyLaSalle PC Reservation System</title>
 
         <script src="javascript/jquery-3.2.1.min.js"></script>
@@ -26,7 +26,7 @@
                 <li><span id="nav-time"><script type="text/javascript"></script></span></li>
                 <span class="divider"> | </span>
                 <li id="logout-button"><a href="index.html">Logout</a></li>
-                <li> MLS PC Reservation System</li>
+                <li id="site-title"> MLS PC Reservation System</li>
             </ul>
 
         </section>
@@ -82,11 +82,24 @@
 
                 </div>
                 <!-- TODO Complete form action -->
-                <FORM ACTION="/sofengg/Admin_Controller" METHOD="post"
-                      name="reserve-form" id="reserve-form"></FORM>
-                <button id="submit_button">Reserve</button>
+                
+                <div class="current-bookings">
+                    <span> Current Booking(s): </span>
+                    <!-- If wala pang PC na na-reserve: -->
+                    <div id="no-pc"> No PCs reserved for today.</div>
+                    <!-- FORMAT -->
+<!--                    <div class="details">
+                    
+                    
 
-                <div class="legend">
+                        <div id="booked-time">08:00AM - 09:00AM</div>
+                        <div id="booked-pc-num"> PC # 01</div>
+                    </div>
+-->
+        
+                </div>
+                
+                 <div class="legend">
                     <span> Legend: </span>
 
                     <table class="legend-table">

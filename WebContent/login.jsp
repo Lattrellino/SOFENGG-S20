@@ -3,54 +3,45 @@
 <html>
 <head>
 
-<script src="javascript/jquery-3.2.1.min.js"></script>
-<script src="javascript/script.js"></script>
-<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+ <title>MyLaSalle PC Reservation System</title>
 
-<link type="text/css" rel="stylesheet" href="\style.css">
+<!--        <link rel="stylesheet" type="text/css" href="css/materialize.css">-->
+        <script src="javascript/jquery-3.2.1.min.js"></script>
+        <script src="javascript/script.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+    </head>
 
-<!--  ====================================================================    Title  ======================================================================================   -->
-<title>MyLaSalle PC Reservation System</title>
+    <body>
+
+        <h1 class="header-text">
+            MLS PC Reservation System
+        </h1>
+
+        <div class="bg-image">
+
+            <div class="tint">
 
 
-</head>
-<body>
-	<!--  ====================================================================    Body  ======================================================================================   -->
+            </div>
 
-	<h1 class="header-text">MLS PC Reservation System</h1>
+        </div>
 
-	<div class="bg-image">
+        <div class="black-tint-small">
 
-		<div class="tint"></div>
+            <p> Welcome to MyLaSalle PC Reservation System for the Learning Commons! 
+                <br />
+                <br />                
+                To begin reserving a PC, please log in by entering your details below: </p>
 
-	</div>
+            <form class="home-input" action="LogInController" method="POST">
 
-	<div class=container>
+                <input type="text" class="text-input" name="id-number" placeholder="ID Number">
+                <input type="password" class="text-input" name="password" placeholder="Password">
 
-		<div id=background>
+                <input type="submit" class = "button" value="Log In">
+            </form>
 
-			<div class="black-tint">
+        </div>
 
-				<p>
-					Welcome to MyLaSalle PC Reservation System for the Learning
-					Commons! 
-					<br />
-					<br />
-					To begin reserving a PC, please log in by
-					entering your details below:
-				</p>
-
-				<form class="home-input" action="LogInController" method="POST">
-					<input type="text" class="text-input" name="id-number" placeholder="ID Number"> 
-					<input type="password" class="text-input" name="password" placeholder="Password">
-					<button class=button>LogIn</button>
-				</form>
-				
-			</div>
-			
-		</div>
-		
-	</div>
-	
-</body>
+    </body>
 </html>

@@ -84,6 +84,7 @@ public class LogIn extends HttpServlet {
 		//-------------------normal user--------------//
 			
 			user_database person = Database.login(username, password);
+			
 			if (person != null) {
 				
 				// save person to session
@@ -98,13 +99,13 @@ public class LogIn extends HttpServlet {
 				request.getSession().setAttribute("current-day", dateFormat.format(date));
 				// redirect to secured page
 				
-				response.sendRedirect("/Admin_Controller");
+				response.sendRedirect("reserve-home.jsp");
 				System.out.println("login dopost");
 			} else {
 				System.out.println("login dopost");
-				response.sendRedirect("reserve-home.jsp");
+				response.sendRedirect("LogInController");
 			
-		}
+			}
 		
 //		
 	}
