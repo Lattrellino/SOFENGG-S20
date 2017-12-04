@@ -55,6 +55,24 @@ section {
     background-image: linear-gradient(180deg, rgba(245, 247, 250, 0.85) 0%, rgba(195, 207, 226, 0.85) 100%); 
 }
 
+.black-tint-small {
+    z-index: 2;
+    height: 60%;
+    width: 100%;
+    position: fixed;
+    top: 15%;
+    left: 0px;
+    background: rgba(0, 0, 0, .24);    
+}
+
+.black-tint-small > p {
+    color: white;
+    font-size: 20pt;
+    margin: 2%;
+    text-align: center;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+}
+
 .black-tint {
     z-index: 2;
     height: 94.5%;
@@ -153,10 +171,11 @@ section {
 .navbar {
     background: black;
     position: fixed;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     width: 100%;
     cursor:default;
+    z-index: 1;
 }
 
 .navbar ul {
@@ -172,6 +191,7 @@ section {
     margin-right: 10px;
     color: white;
 }
+
 
 .navbar li a {
     display: inline-block;
@@ -190,19 +210,47 @@ section {
     text-decoration: none;
 }
 
+
+/*********** Current Booking Thing CSS ***********/
+
 .current-bookings {
     margin-top: 10px;
-    padding: 1%;
+    padding: 2%;
     width: 50%;
     border: 1px solid gray;
     background-color: rgba(255,255,255,0.3);
 }
 
-/*
-#logout-button {
-transition: ease .5s;
+.current-bookings > span {
+    font-weight: bold;
 }
-*/
+
+.current-bookings > div{
+    display: block;
+    font-size: 15px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.50);
+    margin: 2%;
+    padding: 3%;
+    transition: 0.5s ease-in;
+}
+
+.current-booking-links {
+    color: dodgerblue;
+    cursor: pointer;
+}
+
+.current-booking-links > span{
+    position: relative;
+    left: 60%;
+    text-decoration: underline;
+    margin-right: 3%;
+}
+
+.current-booking-links > span:hover{
+    color: darkslategray;
+}
+
 
 #logout-button:hover a {
     cursor: pointer;
@@ -342,8 +390,26 @@ ul {
     padding: 10px 20px 10px 20px;
     outline: none;
     margin-top: 1%;
-    width: 100%;
+    width: 20%;
+    position: relative;
+    left: 80%;
+    cursor: pointer;
 }
+
+#cancel_button {
+    color: white;
+    font-size: 20px;
+    background-color: firebrick;
+    border-style: hidden;
+    padding: 10px 20px 10px 20px;
+    outline: none;
+    margin-top: 1%;
+    width: 20%;
+    position: relative;
+    left: 80%;
+    cursor: pointer;
+}
+
 
 /*********** PC Details Table CSS ***********/
 
@@ -374,10 +440,17 @@ td {
     background-color: dimgray;
 }
 
+.selected-pc {
+    background-color: rgba(0, 177, 255, 0.46);
+    color: white !important;
+}
+
+/*********** Legend CSS ***********/
+
 .legend {
     margin-top: 10px;
     padding: 1%;
-    width: 50%;
+    width: 52%;
     border: 1px solid gray;
     background-color: rgba(255,255,255,0.3);
 }
@@ -393,4 +466,12 @@ td {
     margin: 1%;
     padding: 2%;
     width: 3%;
+}
+
+.booking-details{ 
+    margin-top: 10px;
+    padding: 1%;
+    width: 97.9%;
+    border: 1px solid gray;
+    background-color: rgba(255,255,255,0.3);
 }

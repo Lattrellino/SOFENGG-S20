@@ -22,7 +22,7 @@
                 <li><span id="nav-time"><script type="text/javascript"></script></span></li>
                 <span class="divider"> | </span>
                 <li id="logout-button"><a href="index.html">Logout</a></li>
-                <li> MLS PC Reservation System</li>
+                <li id="site-title"> MLS PC Reservation System</li>
             </ul>
 
         </section>
@@ -78,12 +78,21 @@
 
                 </div>
                 <!-- TODO Complete form action -->
-                <FORM ACTION="/sofengg/Admin_Controller" METHOD="post"
-                      name="reserve-form" id="reserve-form"></FORM>
-                <button id="submit_button">Reserve</button>
                 
                 <div class="current-bookings">
                     <span> Current Booking(s): </span>
+                    <!-- If wala pang PC na na-reserve: -->
+                    <div id="no-pc"> No PCs reserved for today.</div>
+                    <!-- FORMAT -->
+<!--                    <div class="details">
+                    
+                    
+
+                        <div id="booked-time">08:00AM - 09:00AM</div>
+                        <div id="booked-pc-num"> PC # 01</div>
+                    </div>
+-->
+        
                 </div>
                 
                  <div class="legend">
@@ -133,7 +142,6 @@
                     <td>08:00 PM</td>
                 </tr>
 
-
                 <tr>
                     <td>01</td>
                     <td class="available-pc"> </td>
@@ -154,6 +162,13 @@
 
             </table>
             </section>
+            
+<!--
+            <div class="booking-details"> 
+                <span>helo</span>
+            </div>
+-->
+            
         </section>
     </body>
 </html>

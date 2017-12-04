@@ -1,0 +1,319 @@
+
+
+<!--  ====================================================================    Style for admin ======================================================================================   -->
+
+
+	.admin_container{
+		padding: 20px;
+		left: 70px;
+		height: 70px;
+		width: 70px;
+		background: deepskyblue;
+		color:  deepskyblue;
+	}
+
+
+
+
+
+<!--  ====================================================================    Body  ======================================================================================   -->			
+			#box_UpperBar{
+				position: static;
+			}
+			
+			.UpperBar, .Photos_Choice, .More_Photos{
+				position:relative;
+				padding: 5px;
+				border: 3px solid deepskyblue;
+				height:30px;
+				width: 100%;
+				box-shadow: 5px 5px black;
+				background: deepskyblue;
+				color:  deepskyblue;
+			}
+			
+			.UpperBar{
+				width: 98%;
+			}
+			
+			#Outline_More_Photos{
+				position:fixed;
+				bottom: 10%;
+				
+			}
+			
+			
+			
+			.Home,.Profile,.Search, .Login, .Logout{
+				position: absolute;
+				top:20%;
+			}
+			
+			.Shared_Photos, .Public_Photos{
+				position: absolute;
+			}
+			
+			.Home:hover, .Profile:hover, .Login:hover, .More_Photos:hover,  .Logout:hover { 
+   				 background-color: dodgerblue;
+   				 cursor: pointer;	 
+			}
+			
+			.Search:hover{
+				cursor: text;
+			}
+			
+			.Home, .Public_Photos , .More_Photos{
+				padding: 5px;
+				border: 3px solid deepskyblue;
+				width: 70px;
+				background: deepskyblue;
+				color: white;
+			}
+			
+			.Profile{
+				left: 7%;
+				padding: 5px;
+				border: 3px solid deepskyblue;
+				width: 70px;
+				background: deepskyblue;
+				color: white;
+			}
+			
+			.Search{
+				left: 17%;
+				width: 200px;
+				padding: 5px;
+				border: 3px solid deepskyblue;
+			}
+			
+			.Login, .Shared_Photos, .Logout{
+				right: 5%;	
+				padding: 5px;
+				border: 3px solid deepskyblue;
+				background: deepskyblue;
+				color: white;
+			}
+			
+			.Shared_Photos{
+				right: 22%;
+			}
+			
+						
+			.Photos_Choice{
+				width: 17%;
+			}
+			
+			.Public_Photos{
+				left: 22%;
+				width: 100px;
+			}
+			
+			.More_Photos{
+				position: absolute;
+				width: 120px;
+				top:90%;
+				left: 5%;
+			}
+			
+			input[type="text"], input[type="password"] {
+  				 width: 200px;
+			}
+			
+			p{
+				  font-weight: bold;
+			}
+			
+			
+			table.Shared_Table, table.Public_Table{
+				position: relative;
+				border: 3px solid black;
+				width: 40%;
+				display: inline-block;
+				float: left;
+				
+			}
+			
+			table.Shared_Table{
+				width:16%;
+			}
+			
+			input.loaded_image{
+				display:block; 
+				width:100%; 
+				height:auto;
+				text-align: center;
+				margin: auto;
+			}
+			
+			table.Shared_Table td, table.Public_Table td{
+				border: 1px solid black;
+				width: 300px;
+				text-align: center;
+				
+			}
+
+			
+
+			table.Shared_Table td:hover, table.Public_Table td:hover{
+			   	background-color: dodgerblue;
+   				cursor: pointer;	
+   			
+			}
+			
+			#Photo_Table{
+				position: static;
+				
+				
+			}
+			
+			.Public_Table{
+				left: 5%;
+			}			
+			
+			.Shared_Table{
+				left: 27%;
+			
+			}
+			
+			#Photo_Label{
+				position: static;
+				height: 100 px;
+			}
+			
+			#Photo_Details_Label, #Photo{
+				position:static;
+				width: 100%;	
+			}
+			
+			table#Photo_Details_Label_Table, table#Photo_Table{
+				position:relative;
+				left: 5%;
+				width: 90%;
+				border: 1px solid black;
+			}
+			
+			table#Photo_Table{
+				height:80%;
+				
+			}
+			
+			#Photo_Table img{
+				display:block; 
+				width:100%; 
+				height:auto;
+				text-align: center;
+			}
+			
+			#Photo_Table td:nth-child(1){
+				width: 70%;
+				
+			}
+			
+			#Photo_Table td:nth-child(2){
+				border: 1px solid black;
+				width: 30%;
+				align: justify;
+				vertical-align:top;
+				font-size: 20px;
+				
+			}
+			
+			#Photo_Table_Details td:nth-child(1){
+				vertical-align:top;
+				
+			}
+			#Photo_Table_Details td:nth-child(2){
+				font-size: 15px;
+				vertical-align:top;
+				
+			}
+			
+			#Share_Option{
+				visibility: hidden;
+			}
+			
+			
+			#Upload_Photos_Outline{
+				position: static;
+				width: 100%;
+			}
+			
+			#Upload_Photos{
+				position: relative;
+				left: 35%
+				
+			}
+			
+	.IMGProfile{
+		float: left;
+		max-width: 100%;
+		max-height: 100%;
+		margin: 10px;
+		padding: 5px;
+		display: inline-block;
+	}
+	
+	.UserProfile{
+		clear: both;
+		float: left;
+		width: 50%;
+		background: #F5F5F5;
+	}
+	
+	.UserName{
+		margin-top: 50px;
+		font-weight: bold;
+		font-size: 200%;
+	}
+			
+		
+	.UserDescription{
+		margin-top: 100px;
+		padding: 5px;
+		border: 3px solid ##F5F5F5;
+
+		 
+		box-shadow: 5px 5px black;
+		background: #F5F5F5;
+	}
+	
+	
+	
+	.UserPictureContainer{
+		position: relative;
+		margin-top: 10px;
+		padding-top: 10px;
+		width: 99.5%;
+		border: 3px solid #E0FFFF;
+		box-shadow: 5px 5px black;
+		background: #E0FFFF;
+		display: inline-block;
+	
+	}
+	
+	.UserPicture{
+		float: left;
+		margin:10px;
+		padding:10px;
+	}
+	
+	table#Photo_Table_Details > tbody > tr:nth-child(2) > td:nth-child(1){
+		font-weight: bold;
+		font-size: 20px;
+		
+	}
+
+	table#Photo_Table_Details{
+		padding: 20px;
+	}
+	
+
+
+
+
+			
+			
+
+			
+			
+			
