@@ -26,7 +26,7 @@
 
         <section class = "navbar">
             <ul>
-                <li id="nav-loggedin"><span>Welcome, [id num nung naka log in] </span></li>
+                <li id="nav-loggedin"><span>Welcome, ${person.getUserID()} </span></li>
                 <span class="divider"> | </span>
                 <li><span id="nav-date">Date </span></li>
                 <li><span id="nav-time"><script type="text/javascript"></script></span></li>
