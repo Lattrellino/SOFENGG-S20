@@ -45,6 +45,8 @@ public class Admin_Controller extends HttpServlet {
 		}
 		request.getSession().setAttribute("avail", available);
 		
+		user_database person = (user_database) request.getSession().getAttribute("person");
+		
 		request.getRequestDispatcher("reserve-home.jsp").forward(request, response);
 	}
 
