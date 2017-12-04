@@ -341,6 +341,100 @@ public class Database {
 		et.commit();
 	}
 	
+		
+	
+	//========================================================Check The peak hours===============================================================//
+	
+	public static String checkPeakHours(String date) {
+		
+		EntityManager em = emf.createEntityManager();
+		String temp = "00:00:00";
+		
+
+		
+		
+		try {
+//			select *,count(time)
+//			from log
+//			where date = "2017-11-24"
+//			group by time
+//			order by count(time) desc
+//			;
+			
+		Query query =  em.createQuery("select u from log as u where u.date = :date group by u.time order by count(u.time) desc");
+		query.setParameter("date", Date.valueOf(date));
+		
+		
+			log_database user = (log_database) query.getSingleResult();
+			temp = user.getTime().toString();
+			
+			if(user != null) {
+				System.out.println("Got it");
+				return temp;
+			}
+			
+		} catch (NoResultException | NumberFormatException e) {
+			System.out.println("No result");
+
+		} finally {
+			em.close();
+		}
+		
+		
+		return temp;
+		
+		
+	}
+	
+	
+//=============================================================Check most reserved PC all time=========================================//
+	
+	
+	public static int checkMostReserved() {
+		
+		EntityManager em = emf.createEntityManager();
+		int temp = 0;
+		
+
+		
+		
+		try {
+//			select *, count(pc_no)
+//			from log
+//			group by pc_no
+//			order by count(pc_no) desc
+//			;
+
+			
+		Query query =  em.createQuery("select u from log as u group by u.pc_no order by count(u.pc_no) desc");
+		
+		
+			log_database user = (log_database) query.getSingleResult();
+			temp = user.getPcNo();
+			
+			if(user != null) {
+				System.out.println("Got it");
+				return temp;
+			}
+			
+		} catch (NoResultException | NumberFormatException e) {
+			System.out.println("No result");
+
+		} finally {
+			em.close();
+		}
+		
+		
+		return temp;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 	
 
 }
