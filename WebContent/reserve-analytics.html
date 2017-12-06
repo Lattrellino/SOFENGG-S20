@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <title>MyLaSalle PC Reservation System</title>
+
+        <script src="javascript/jquery-3.2.1.min.js"></script>
+        
+        <script src="javascript/graph.js"></script>
+        
+        <script src="javascript/canvasjs.min.js"></script>
+        
+         <script src="javascript/script.js"></script>
+        
+         <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+    </head>
+
+    <body>
+
+        <section class = "navbar">
+            <ul>
+                <li id="nav-loggedin"><span>Welcome, [id num nung naka log in] </span></li>
+                <span class="divider"> | </span>
+                <li><span id="nav-date">Date </span></li>
+                <li><span id="nav-time">Time</span></li>
+                 <span class="divider"> | </span>
+                <li id="logout-button"><a href="index.html">Logout</a></li>
+                <li id="site-title"> MLS Admin Analytics</li>
+            </ul>
+        
+        </section>
+        
+        <div class="bg-image">
+
+            <div class="tint">
+
+            </div>
+
+        </div>
+
+        <section class="black-tint-admin">
+            <!-- sidebar to choose different details -->
+            <section class="sidebar-menu">
+                <label class = "chartLabel"> Charts </label>
+                <ul class="menu-items">
+                    <hr>
+                    <li id = "pkChart" onclick="pkcFunction()">Peak Hours</li>
+                    <hr>
+                    <li id = "mrpChart" onclick="mrpcFunction()">Most Reserved PC</li>
+                    <hr>
+                    <li id = "mrlChart" onclick="mrlcFunction()">Most Reserved Location</li>
+                    <hr>
+                </ul>
+            </section>
+            <!-- sidebar containing Analytics -->
+            
+            <section class="sidebar-dashboards">
+                <div id="chartContainer"></div>
+            </section>
+        </section>
+    </body>
+</html>
