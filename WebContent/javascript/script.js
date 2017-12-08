@@ -4,6 +4,7 @@ var months = ["January", "February", "March", "April", "May", "June", "July", "A
 
 var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
+var clicked;
 
 function getCurrentDate() {
     currDay = date.getDate();
@@ -86,28 +87,34 @@ function initializeTopBar(){
 
 function updateClock() {
     var now = new Date();
-    
+
     var seconds = now.getSeconds();
 
-  /*  if(seconds < 10)
+    /*  if(seconds < 10)
         seconds = "0" + seconds;*/
-    
+
     var time = now.getHours() + ':' + now.getMinutes() + ':' + seconds; 
-    
-//    console.log(time);
-    document.getElementById('nav-time').innerHTML = time;   
+
+    //    console.log(time);
+    //    document.getElementById('nav-time').innerHTML = time;   
 
 }
 
 setInterval(updateClock, 1000);
 
 $(document).ready(function(){    
-    date = new Date();
+    date = new Date();  
 
-    initializeTopBar();
-    getCurrentDate();
-    loadCalendar();
+    var currentWindow = window.location.href;
+    if(currentWindow.indexOf("reserve") > 0){
+        initializeTopBar();
+        getCurrentDate();
+        loadCalendar();
+        clicked = 0;
+    }
+
     formDate = currYear + "" + currMonth + "" + currDay;
+
     $("#prev-month").click(function(){
         console.log("prev month");
 
@@ -193,6 +200,7 @@ $(document).ready(function(){
     }); 
 
     $(document).on("click", "#days li", function() {
+        clicked = 0; /* TODO: updates when may reserved pc na nung day na yun. so dapat bawal magclick si user */
         var date = $(this).children(".hidden").text();
         //    	formDate = date;
 
@@ -214,48 +222,53 @@ $(document).ready(function(){
     });
 
     $(document).on("click", ".available-pc", function(){
-        var pcNo = $(this).children(".hidden").text().split("|")[0];
-        var time = $(this).children(".hidden").text().split("|")[1];
+        if(clicked < 2){
+            var pcNo = $(this).children(".hidden").text().split("|")[0];
+            var time = $(this).children(".hidden").text().split("|")[1];
 
-        formPcNo = pcNo;
-        formTime = time;
-        //    	console.log(formPcNo + " + " + formTime);
-        $(this).removeClass("available-pc");
-        $(this).addClass("selected-pc");
+            formPcNo = pcNo;
+            formTime = time;
+            //    	console.log(formPcNo + " + " + formTime);
+            $(this).removeClass("available-pc");
+            $(this).addClass("selected-pc");
 
-        /* add div show booking details */
+            /* add div show booking details */
 
-        var rightSidebar = $(".right-sidebar");
+            var rightSidebar = $(".right-sidebar");
 
-        var divDetails = document.createElement("div");
-        $(divDetails).addClass("booking-details");
+            var divDetails = document.createElement("div");
+            $(divDetails).addClass("booking-details");
 
-        var dateTimeDetails = document.createElement("p");
-        dateTimeDetails.innerHTML = pcNo + time;
-        divDetails.appendChild(dateTimeDetails);
+            var dateTimeDetails = document.createElement("p");
+            dateTimeDetails.innerHTML = pcNo + time;
+            divDetails.appendChild(dateTimeDetails);
 
-        rightSidebar.append(divDetails);
+            rightSidebar.append(divDetails);
 
-        var reserveButton = document.createElement("div");
-        reserveButton.innerHTML ="<FORM ACTION='Admin_Controller' METHOD='post'"+
-            "name='reserve-form' id='reserve-form'></FORM>"+
-            "<button id='submit_button'>Reserve</button>";
+            var reserveButton = document.createElement("div");
+            reserveButton.innerHTML ="<FORM ACTION='Admin_Controller' METHOD='post'"+
+                "name='reserve-form' id='reserve-form'></FORM>"+
+                "<button id='submit_button'>Reserve</button>";
 
-        var cancelButton = document.createElement("div");
-        cancelButton.innerHTML = "<button id='cancel_button'>Cancel</cancel>";
+            var cancelButton = document.createElement("div");
+            cancelButton.innerHTML = "<button id='cancel_button'>Cancel</cancel>";
 
-        divDetails.appendChild(cancelButton);
+            divDetails.appendChild(cancelButton);
 
-        divDetails.append(reserveButton);  
+            divDetails.append(reserveButton);  
+            clicked++;
+        }
 
     });
 
     $(document).on("click", "#cancel_button",function(){
         $(".booking-details").remove();
+        /* TODO: change color of cell if nagcancel */
     });
 
     $(document).on("click", "#submit_button", function(){
         submitForm();
+        /* TODO: change color of cell to red */
     });
 
     $("#next-month").on("click", function(){
@@ -276,27 +289,44 @@ $(document).ready(function(){
         loadCalendar();
     });
 
-    $("#month-name").on("click", function(){
-        /* insert code pag ni-click ni user yung month name, it zooms out and shows all months for that year */ 
-    });
-
-    $(".details").hover(function(){
+    $("#details").hover(function(){
         var divLinks = document.createElement("div");
-        var editText = document.createElement("span");
         var cancelText = document.createElement("span");
 
-        editText.innerHTML = "Edit";
         cancelText.innerHTML = "Cancel";   
 
-        divLinks.appendChild(editText);
         divLinks.appendChild(cancelText);
 
         $(divLinks).attr("class", "current-booking-links");
-        $(".details").append(divLinks);   
-    }
-                        , function(){
+        $("#details").append(divLinks);   
+    } , function(){
         var temp = $(".details").children();
         $(".current-booking-links", this).remove();
     });
 
+    $(".login-button").on("click", function(){
+        alert("helo");
+        event.preventDefault();
+
+        var tfIdNum = document.getElementById("id-number");
+        var tfPassword = document.getElementById("password");
+
+        if (tfPassword.value == "" && tfIdNum.value == "") {
+            console.log("error message");
+
+            var messageDiv;
+
+            messageDiv = document.createElement("div");
+
+            messageDiv.innerHTML = "Missing inputs.";
+            $(messageDiv).attr("class", "error-message");
+            var container = $(".home-input");
+
+            container.append(messageDiv);
+
+        } else if(tfPassword.value != "" && tfIdNum.value != ""){
+            console.log("submit form");
+            $(".home-input").submit();
+        }
+    });
 });
