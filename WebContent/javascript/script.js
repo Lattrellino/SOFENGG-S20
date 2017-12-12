@@ -35,7 +35,7 @@ function loadCalendar(){
     }
     
     $("#view-date").val(currFullYear + "-" + currMonth + "-" + currDay);
-    $("#view-button").submit();
+    $("#view-form").submit();
 
     for(var dayCounter = 1; dayCounter <= currMonthDays; dayCounter++){
 
@@ -280,7 +280,7 @@ $(document).ready(function(){
     $(document).on("change", "#place-dropdown", function(){
         $("#view-floor").val($("#place-dropdown :selected").val());
         console.log($("#view-floor").val());
-        $("#view-button").submit();
+        $("#view-form").submit();
     });
         
 });
