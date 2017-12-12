@@ -200,5 +200,23 @@
                 </div>
             </section>
         </section>
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+   			<form action="/sofengg/view" method="POST">	
+                <input type="text" name="view-floor" placeholder="view-floor">
+                <input type="text" name="view-date" placeholder="view-date">
+                <input type="submit" class = "button" value="View">
+   		 	</form>
+   		 	
+    		<form action="/sofengg/reserve" method="POST">
+                <input type="text" name="reserve-pcno" placeholder="reserve-pcno">
+                <input type="text" name="reserve-time" placeholder="reserve-time">
+                <input type="submit" class = "button" value="reserve">
+    		</form>
+
+    		<form action="/sofengg/remove" method="POST">
+                <input type="text" name="remove-pcno" placeholder="remove-pcno">
+                <input type="text" name="remove-time" placeholder="remove-time">
+                <input type="submit" class = "button" value="remove">
+    		</form>
     </body>
 </html>
