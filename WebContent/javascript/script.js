@@ -160,9 +160,6 @@ $(document).ready(function(){
         $(this).attr("id", "current-day");
         $(document.getElementById("current-day")).innerHTML = months[month-1] + " " + day + ", " + year;
 
-        $("#view-form").submit();
-
-
     }); 
 
     $(document).on("click", "#days li", function() {
@@ -185,6 +182,7 @@ $(document).ready(function(){
 
         $("#view-date").val(date);
         console.log( $("#view-date").val());
+        $("#view-form").submit();
 
     });
 
@@ -284,21 +282,21 @@ $(document).ready(function(){
         console.log($("#view-floor").val());
         $("#view-form").submit();
     });
-    
+
     $(document).on("click", ".rButton",function(){
         location.href = 'reserve-home-admin.html';
     });
-    
+
     $(document).on("click", ".aButton",function(){
         location.href = 'reserve-analytics.html';
     });
-      
-    
+
+
     function filldeleteform(pcno, date, time){
         var pcNo = $("#remove-pcno").val(pcno);
         var time = $("#remove-time").val(time);
         var date = $("#remove-date").val(date);
-        
+
         $("#remove-form").submit();
     }
 
