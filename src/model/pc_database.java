@@ -18,6 +18,9 @@ public class pc_database {
 	@Column(name = "user_id")
 	private int userId;
 	
+	@Column(name = "floor")
+	private int floor;
+	
 	public int getPcNo() {
 		return pcNo;
 	}
@@ -29,6 +32,11 @@ public class pc_database {
 	public int getUserId() {
 		return userId;
 	}
+	
+	public int getFloor() {
+		return floor;
+	}
+
 
 
 }
