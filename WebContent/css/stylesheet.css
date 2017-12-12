@@ -477,6 +477,22 @@ td {
     background-color: rgba(255,255,255,0.3);
 }
 
+.booking-details p {
+    display: inline-flex;
+}
+
+.booking-details input {
+    display: inline-flex;
+    margin: 1%;
+}
+
+#reserve-button {
+    display: block;
+    position: relative;
+    left: 10%;
+}
+
+
 /*********** Admin Analytics Screen CSS ***********/
 
 .black-tint-admin {

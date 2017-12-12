@@ -145,13 +145,13 @@ $(document).ready(function(){
         loadCalendar();
     });
 
-//    function submitForm()
-//    {
-//        //String pcNo, String Date, String Time, String UserID
-//        //TODO <INPUT TYPE="hidden" NAME="pcNo" VALUE="value1">
-//        //<INPUT TYPE="hidden" NAME="date" VALUE="value2">
-//        //<INPUT TYPE="hidden" NAME="time" VALUE="value2">
-//    }
+    //    function submitForm()
+    //    {
+    //        //String pcNo, String Date, String Time, String UserID
+    //        //TODO <INPUT TYPE="hidden" NAME="pcNo" VALUE="value1">
+    //        //<INPUT TYPE="hidden" NAME="date" VALUE="value2">
+    //        //<INPUT TYPE="hidden" NAME="time" VALUE="value2">
+    //    }
 
     //var formPcNo, formDate, formTime, formUserId;
     //TODO make a form that gets the day and the time and submit when button is pressed and if a new day isnt selected, get the current day
@@ -188,6 +188,9 @@ $(document).ready(function(){
 
         $(document.getElementById("current-day")).removeAttr("id");
         $(this).attr("id", "current-day");
+        $(this).attr("value", year + "-" + months[month-1] + "-" + day);
+
+        alert($(this).text());
 
         chosenDateText.innerHTML = months[month-1] + " " + day + ", " + year;
 
@@ -199,7 +202,7 @@ $(document).ready(function(){
     });
 
     $(document).on("click", "#submit_button", function(){
-//        submitForm();
+        //        submitForm();
         /* TODO: change color of cell to red */
     });
 
@@ -260,46 +263,25 @@ $(document).ready(function(){
             $(".home-input").submit();
         }
     });
-    
-     $(document).on("click", ".available-pc", function(){
+
+    $(document).on("click", ".available-pc", function(){
         if(clicked < 2){
+            var form = $(".pc-booking-info");
             var time = $(this).children(".time").val();
             var pcNo = $(this).parent().children(".pc-number").children(".pcnum").val();
             var date = $("#chosen-date").text();
             var floor = $("#place-dropdown :selected").text();
-            
+
+            var tfTime = $("#reserve-time").val($(this).children(".time").val());
+
+            var tfPCNo = $("#reserve-pcno").val($(this).parent().children(".pc-number").children(".pcnum").val());
+
             console.log(time);
             console.log($(this).parent().children(".pc-number").children(".pcnum").val());
             console.log(floor);
-            
-//            formPcNo = pcNo;
-            formTime = time;
-            //    	console.log(formPcNo + " + " + formTime);
-            $(this).removeClass("available-pc");
-            $(this).addClass("selected-pc");
 
-            /* add div show booking details */
-            
-            var rightSidebar = $(".right-sidebar");
 
-            var divDetails = document.createElement("div");
-            $(divDetails).addClass("booking-details");
 
-            var dateTimeDetails = document.createElement("p");
-            dateTimeDetails.innerHTML = "You want to reserve PC# " + pcNo + " in " + floor +" at " + date + ", " + time;
-            divDetails.appendChild(dateTimeDetails);
-
-            rightSidebar.append(divDetails);
-
-            var reserveButton = document.createElement("div");
-            reserveButton.innerHTML = "<input type='button' id='submit_button' value='Reserve'>";
-
-            var cancelButton = document.createElement("div");
-            cancelButton.innerHTML = "<button id='cancel_button'>Cancel</cancel>";
-
-            divDetails.appendChild(cancelButton);
-
-            divDetails.append(reserveButton);  
             clicked++;
         }
 
