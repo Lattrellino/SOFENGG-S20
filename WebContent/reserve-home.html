@@ -91,14 +91,13 @@
                     <!--                    <div id="no-pc"> No PCs reserved for today.</div>-->
                     <!-- FORMAT -->
 
-                    <form action="/sofengg/remove" method="POST" id="remove-form">
+                    <form>
                         <input type="hidden" name="remove-pcno" id="remove-pcno" placeholder="remove-pcno">
                         <input type="hidden" name="remove-time" id="remove-time" placeholder="remove-time">
                         <input type="hidden" name="remove-date" id="remove-date" placeholder="remove-date">
 
                         <div class="details">
-                            <input type="hidden" name="remove-time" id="remove-pcno" placeholder="remove-time">
-                            <input type="submit" class = "button" value="x" id="remove-button" onclick="filldeleteform(pcno, date, time)"> 
+                            <input type="submit" class = "button" value="x" id="remove-button" onclick='filldeleteform("01", "2017-12-12", "08:00:00")'> 
                             <div class="booked-date" id="2017-12-12">December 12, 2017</div>
                             <div class="booked-time" id="08:00:00">08:00AM - 09:00AM</div>
                             <div class="booked-pcno" id="01"> PC # 01</div>

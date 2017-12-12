@@ -291,14 +291,16 @@ $(document).ready(function(){
         location.href = 'reserve-analytics.html';
     });
 
-
-    function filldeleteform(pcno, date, time){
-        var pcNo = $("#remove-pcno").val(pcno);
-        var time = $("#remove-time").val(time);
-        var date = $("#remove-date").val(date);
-
-        $("#remove-form").submit();
-    }
-
-
 });
+
+function filldeleteform(pcno, date, time){
+    var inputPcNo = $("#remove-pcno").val(pcno);
+    var inputTime = $("#remove-time").val(time);
+    var inputDate = $("#remove-date").val(date);
+//
+//    alert($("#remove-pcno").val());
+//    alert($("#remove-time").val());
+//    alert($("#remove-date").val());
+
+    $("#remove-form").submit();
+}
