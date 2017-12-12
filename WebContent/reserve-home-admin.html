@@ -1,0 +1,219 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <title>MyLaSalle PC Reservation System</title>
+
+        <script src="javascript/jquery-3.2.1.min.js"></script>
+
+        <script src="javascript/script.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+    </head>
+
+    <body>
+
+        <section class="navbar">
+            <ul>
+                <li id="nav-loggedin">Welcome<span id="id-num">[id num nung naka login] </span></li>
+                <span class="divider"> | </span>
+                <li><span id="nav-date">Date </span></li>
+                <li><span id="nav-time"><script type="text/javascript"></script></span></li>
+                <span class="divider"> | </span>
+                <li id="logout-button"><a href="index.html">Logout</a></li>
+                <li id="site-title"> MLS PC Reservation System</li>
+            </ul>
+
+        </section>
+
+        <div class="bg-image">
+
+            <div class="tint"></div>
+
+        </div>
+        
+        <div class="switchContainer">
+            <button class="rButton" onclick="location.href = 'reserve-home-admin.html'">Reservation</button>
+            <button class="aButton" onclick="location.href = 'reserve-analytics.html'">Analytics</button>
+        </div>
+
+        <section class="black-tint"> <!-- sidebar to choose resrvation details -->
+
+            <section class="left-sidebar"> <!-- dropdown to select the floor -->
+
+                <h2 id="chosen-date"> Chosen Date</h2>
+
+                <form action="/sofengg/view" method="POST" id="view-form">
+
+                    <input type="hidden" name="view-floor" id="view-floor" value="7">
+                    <input type="hidden" name="view-date" id="view-date" value=" ">
+                </form>
+
+                <select id="place-dropdown" name="Place">
+                    <option value="7"> 7th Floor</option>
+                    <option value="8"> 8th Floor</option>
+                    <option value="9"> 9th Floor</option>
+                    <option value="10"> 10th Floor</option>
+                    <option value="11"> 11th Floor</option>
+                    <option value="12"> 12th Floor</option>
+                </select> 
+
+                <!-- calendar -->
+
+                <div class="calendar-container">
+
+                    <div class="month">
+                        <ul>
+                            <li id="prev-month">&#10094;</li>
+                            <li id="next-month">&#10095;</li>
+                            <li id="month-name">August</li>
+                            <span id="year">2017</span>
+                        </ul>
+                    </div>
+
+                    <ul class="weekdays">
+                        <li>Sun</li>
+                        <li>Mon</li>
+                        <li>Tues</li>
+                        <li>Wed</li>
+                        <li>Thurs</li>
+                        <li>Fri</li>
+                        <li>Sat</li>
+                    </ul>
+
+                    <ul id="days">
+
+
+                    </ul>
+
+                </div>
+                <!-- TODO Complete form action -->
+                <span> Current Booking(s): </span>
+                <div class="current-bookings">
+
+                    <!-- If wala pang PC na na-reserve: -->
+                    <div id="no-pc"> No PCs reserved for today.</div>
+                    <!-- FORMAT -->
+                    <!--                    <div class="details">
+
+
+
+<div id="booked-time">08:00AM - 09:00AM</div>
+<div id="booked-pc-num"> PC # 01</div>
+</div>
+-->
+
+                </div>
+
+                <div class="legend">
+                    <span> Legend: </span>
+
+                    <table class="legend-table">
+
+                        <tr class="legend-tr">
+                            <td class="available-pc"></td>
+                            <td class="legend-td">Available</td>
+                        </tr>
+
+                        <tr class="legend-tr">
+                            <td class="reserved-pc"></td>
+                            <td class="legend-td">Reserved</td>
+                        </tr>
+
+                        <tr class="legend-tr">
+                            <td class="unavailable-pc"></td>
+                            <td class="legend-td">Under Repair</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+            </section> <!-- sidebar containing PC information --> 
+            <section class="right-sidebar">
+                <table class="pc-info">
+                    <!-- row containing time -->
+
+                    <tr class="time-header">
+                        <th></th>
+                        <td class="booking-time">07:00 AM</td>
+                        <td class="booking-time">08:00 AM</td>
+                        <td class="booking-time">09:00 AM</td>
+                        <td class="booking-time">10:00 AM</td>
+                        <td class="booking-time">11:00 AM</td>
+                        <td class="booking-time">12:00 PM</td>
+                        <td class="booking-time">01:00 PM</td>
+                        <td class="booking-time">02:00 PM</td>
+                        <td class="booking-time">03:00 PM</td>
+                        <td class="booking-time">04:00 PM</td>
+                        <td class="booking-time">05:00 PM</td>
+                        <td class="booking-time">06:00 PM</td>
+                        <td class="booking-time">07:00 PM</td>
+                        <td class="booking-time">08:00 PM</td>
+                    </tr>
+
+                    <tr>
+                        <td class="pc-number">
+                            <input type="hidden" class="pcnum" value="01">01
+                        </td>
+                        <td class="available-pc">
+                            <input type="hidden" class="time" value="07:00:00">
+                        </td>
+                        <td class="available-pc">
+                            <input type="hidden" class="time" value="08:00:00">
+                        </td>
+                        <td class="available-pc">
+                            <input type="hidden" class="time" value="09:00:00">
+                        </td>
+                        <td class="available-pc">
+                            <input type="hidden" class="time" value="10:00:00">
+                        </td>
+                        <td class="available-pc">
+                            <input type="hidden" class="time" value="11:00:00">
+                        </td>
+                        <td class="available-pc">
+                            <input type="hidden" class="time" value="12:00:00">
+                        </td>
+                        <td class="available-pc">
+                            <input type="hidden" class="time" value="13:00:00">
+                        </td>
+                        <td class="available-pc">
+                            <input type="hidden" class="time" value="14:00:00">
+                        </td>
+                        <td class="available-pc">
+                            <input type="hidden" class="time" value="15:00:00">
+                        </td>
+                        <td class="available-pc">
+                            <input type="hidden" class="time" value="16:00:00">
+                        </td>
+                        <td class="available-pc">
+                            <input type="hidden" class="time" value="17:00:00">
+                        </td>
+                        <td class="available-pc">
+                            <input type="hidden" class="time" value="18:00:00">
+                        </td>
+                        <td class="reserved-pc">
+                            <input type="hidden" class="time" value="19:00:00">
+                        </td>
+                        <td class="available-pc"> 
+                            <input type="hidden" class="time" value="20:00:00">
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="booking-details">
+                    <form action="/sofengg/reserve" method="POST">
+                        <p> PC Number: </p>
+                        <input type="text" name="reserve-pcno" placeholder="reserve-pcno" id="reserve-pcno" readonly="readonly">
+                        <p> Time: </p>
+                        <input type="text" name="reserve-time" placeholder="reserve-time" id="reserve-time" readonly="readonly">
+                        <input type="submit" class = "button" id="reserve-button" value="Reserve">
+                    </form>
+                </div>
+
+            </section>
+
+
+        </section>
+    </body>
+</html>

@@ -282,5 +282,13 @@ $(document).ready(function(){
         console.log($("#view-floor").val());
         $("#view-form").submit();
     });
+    
+    $(document).on("click", ".rButton",function(){
+        location.href = 'reserve-home-admin.html';
+    });
+    
+    $(document).on("click", ".aButton",function(){
+        location.href = 'reserve-analytics.html';
+    });
         
 });
