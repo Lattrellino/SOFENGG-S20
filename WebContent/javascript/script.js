@@ -4,15 +4,12 @@ var months = ["January", "February", "March", "April", "May", "June", "July", "A
 
 var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-
-
+var clicked;
 
 function getCurrentDate() {
     currDay = date.getDate();
     currMonth = date.getMonth();
     currFullYear = date.getFullYear();
-    //    currYear = date.getYear();
-    //    console.log(day + "/" + month + "/" + year);
 }
 
 function loadCalendar(){
@@ -20,41 +17,49 @@ function loadCalendar(){
     var divMonth = document.getElementById("month-name");
     var ulDays = document.getElementById("days");
     var spanYear = document.getElementById("year");
+    var currDateText = document.getElementById("chosen-date");
     var tempListItem;
 
     var currMonthDays = new Date(currFullYear, currMonth, 0).getDate();
     var firstDay = new Date(currFullYear, currMonth, 1).getDay();
-    
+
     var formPcNo, formDate, formTime, formUserId;
     divMonth.innerHTML = months[currMonth];
     spanYear.innerHTML = currFullYear;
-    console.log("am here");
+
+    currDateText.innerHTML = months[currMonth] + " " + currDay + ", " + currFullYear;
+
     for(var firstDayCounter = 0; firstDayCounter < firstDay; firstDayCounter++){
         tempListItem = document.createElement("li");
         ulDays.appendChild(tempListItem);
     }
 
+    $("#view-date").val(currFullYear + "-" + currMonth + "-" + currDay);
+    //   
     for(var dayCounter = 1; dayCounter <= currMonthDays; dayCounter++){
 
         tempListItem = document.createElement("li");
         tempListItem.innerHTML = dayCounter;
-        
+
         //add a hidden element to the day that we can access when we click on it
-        var day = dayCounter;
-        if (day < 10)
-        	day = "0" + dayCounter;
-        var temp =  currFullYear + "" + (currMonth + 1) + "" + day;
+        var temp =  currFullYear + "-" + (currMonth + 1) + "-" + dayCounter;
         $(tempListItem).append("<div class = 'hidden'>" + temp + "</div>");
-        
+
         if(dayCounter < date.getDate() && currMonth == date.getMonth()){
-            $(tempListItem).addClass("reserved-pc");
-        }
-        else
-        {
-        	$(tempListItem).addClass("day");
+            $(tempListItem).addClass("unvailable-pc");
+        } else if (currMonth != date.getMonth() && currYear < date.getYear()) {
+            $(tempListItem).addClass("unavailable-pc");
+        } else {
+            $(tempListItem).attr("id", "day");
         }
 
+        if(date.getDate() == dayCounter && currMonth == date.getMonth())
+            $(tempListItem).attr("id", "current-day");
+
         ulDays.appendChild(tempListItem);
+
+        //         $("#view-form").submit();
+
     }
 
 }
@@ -71,35 +76,47 @@ function initializeTopBar(){
 
     if(currMin < 10){
         currMin = "0" + currMin;
-    }
-    
-    if(currHour > 12){ 
-        currHour = (currHour+11)%12+1;
+    }  else if(currHour < 10){
+        currHour = "0" + currHour;
+    } 
+
+    if(currHour > 12)
         time = "pm";
-    } else {
-        currHour = "0" + currHour;
-    }
-    //x = Integer.parseInt(Integer.toString(currHour).substring(0, 1))
-    if(currHour < 10){
-        currHour = "0" + currHour;
-        
-    }
 
     liTime.innerHTML = currHour + ":" + currMin + time;
 
 }
 
-function refreshTimer(){
+function updateClock() {
+    var now = new Date();
+
+    var seconds = now.getSeconds();
+
+    /*  if(seconds < 10)
+        seconds = "0" + seconds;*/
+
+    var time = now.getHours() + ':' + now.getMinutes() + ':' + seconds; 
+
+    //    console.log(time);
+    //    document.getElementById('nav-time').innerHTML = time;   
 
 }
 
+setInterval(updateClock, 1000);
+
 $(document).ready(function(){    
-    date = new Date();
-    
-    initializeTopBar();
-    getCurrentDate();
-    loadCalendar();
+    date = new Date();  
+
+    var currentWindow = window.location.href;
+    if(currentWindow.indexOf("reserve") > 0){
+        initializeTopBar();
+        getCurrentDate();
+        //loadCalendar();
+        clicked = 0;
+    }
+
     formDate = currYear + "" + currMonth + "" + currDay;
+    /*
     $("#prev-month").click(function(){
         console.log("prev month");
 
@@ -129,69 +146,58 @@ $(document).ready(function(){
 
         loadCalendar();
     });
-    
-    function submitForm()
-    {
-    	//String pcNo, String Date, String Time, String UserID
-    	//TODO <INPUT TYPE="hidden" NAME="pcNo" VALUE="value1">
-		//<INPUT TYPE="hidden" NAME="date" VALUE="value2">
-		//<INPUT TYPE="hidden" NAME="time" VALUE="value2">
-    	console.log(formPcNo + ":" + formDate + ":" + formTime);
-    	var form = document.getElementById("reserve-form");
-    	var input = document.createElement('input');
-    	input.type = 'hidden';
-    	input.name = "pc_no";
-    	input.value = formPcNo;
-    	form.appendChild(input);
-    	
-    	var input1 = document.createElement('input');
-    	input1.type = 'hidden';
-    	input1.name = "date";
-    	input1.value = formDate;
-    	form.appendChild(input1);
-    	
-    	var input2 = document.createElement('input');
-    	input2.type = 'hidden';
-    	input2.name = "time";
-    	input2.value = formTime;
-    	form.appendChild(input2);
-    	
-    	var input3 = document.createElement('input');
-    	input3.type = 'hidden';
-    	input3.name = "user_id";
-    	input3.value = 1;
-    	form.appendChild(input3);
-    	
-    	document.reserve-form.submit();
-    	console.log("plz work");
-    }
-    
-    //var formPcNo, formDate, formTime, formUserId;
-  //TODO make a form that gets the day and the time and submit when button is pressed and if a new day isnt selected, get the current day
-    $(document).on("click", ".day", function()
-    {
-    	var date = $(this).children(".hidden").text();
-    	formDate = date;
-    	console.log(formDate);
-    	$(document.getElementById("current-day")).removeAttr("id");
-    	$(this).attr("id", "current-day");
+
+	*/
+    $(document).on("click", ".day", function(){
+        var month = $(this).children(".hidden").text().split("/")[0];
+        var day = $(this).children(".hidden").text().split("/")[1];
+        var year = $(this).children(".hidden").text().split("/")[2];
+
+        formDate = date;
+        console.log(month + " / " + day+ " / " + year);
+        $(document.getElementById("current-day")).attr("id", "current-day-inactive");
+        $(document.getElementById("current-day")).removeAttr("id");
+        $(this).attr("id", "current-day");
+        $(document.getElementById("current-day")).innerHTML = months[month-1] + " " + day + ", " + year;
+
+    }); 
+    /*
+    $(document).on("click", "#days li", function() {
+        clicked = 0; /* TODO: updates when may reserved pc na nung day na yun. so dapat bawal magclick si user 
+        var date = $(this).children(".hidden").text();
+
+        var month = $(this).children(".hidden").text().split("-")[1];
+        var day = $(this).children(".hidden").text().split("-")[2];
+        var year = $(this).children(".hidden").text().split("-")[0];
+
+        var chosenDateText = document.getElementById("chosen-date");
+
+        $(document.getElementById("current-day")).attr("id", "current-day-inactive");
+
+        $(document.getElementById("current-day")).removeAttr("id");
+        $(this).attr("id", "current-day");
+        $(this).attr("value", year + "-" + months[month-1] + "-" + day);
+
+        chosenDateText.innerHTML = months[month-1] + " " + day + ", " + year;
+
+        $("#view-date").val(date);
+        console.log( $("#view-date").val());
+        $("#view-form").submit();
+
     });
-    $(document).on("click", ".available-pc", function()
-    {
-    	var pcNo = $(this).children(".hidden").text().split("|")[0];
-    	var time = $(this).children(".hidden").text().split("|")[1];
-    	formPcNo = pcNo;
-    	formTime = time;
-    	console.log(formPcNo + " + " + formTime);
-    	$(this).removeClass("available-pc");
-    	$(this).addClass("reserved-pc");
+	*/
+
+    $(document).on("click", "#cancel_button",function(){
+        $(".booking-details").remove();
+        /* TODO: change color of cell if nagcancel */
     });
-    $(document).on("click", "#submit_button", function()
-    {
-    	submitForm();
+
+    $(document).on("click", "#submit_button", function(){
+        //        submitForm();
+        /* TODO: change color of cell to red */
     });
+    /*
     $("#next-month").on("click", function(){
-        console.log("next month");
 
         if(currMonth+1 < 12){
             currMonth++;
@@ -208,8 +214,97 @@ $(document).ready(function(){
 
         loadCalendar();
     });
+		*/
+    $("#details").hover(function(){
+        var divLinks = document.createElement("div");
+        var cancelText = document.createElement("span");
 
-    $("#month-name").on("click", function(){
-        /* insert code pag ni-click ni user yung month name, it zooms out and shows all months for that year */ 
+        cancelText.innerHTML = "Cancel";   
+
+        divLinks.appendChild(cancelText);
+
+        $(divLinks).attr("class", "current-booking-links");
+        $("#details").append(divLinks);   
+    } , function(){
+        var temp = $(".details").children();
+        $(".current-booking-links", this).remove();
     });
+
+    $("#login").on("click", function(){
+        event.preventDefault();
+
+        var tfIdNum = document.getElementById("id-number");
+        var tfPassword = document.getElementById("password");
+
+        if (tfPassword.value == "" && tfIdNum.value == "") {
+            console.log("error message");
+
+            var messageDiv;
+
+            messageDiv = document.createElement("div");
+
+            messageDiv.innerHTML = "Missing inputs.";
+            $(messageDiv).attr("class", "error-message");
+            var container = $(".home-input");
+
+            container.append(messageDiv);
+
+        } else if(tfPassword.value != "" && tfIdNum.value != ""){
+            console.log("submit form");
+            $(".home-input").submit();
+        }
+    });
+
+    $(document).on("click", ".available-pc", function(){
+        //        if(clicked < 2){
+        var form = $(".pc-booking-info");
+        var time = $(this).children(".time").val();
+        var pcNo = $(this).parent().children(".pc-number").children(".pcnum").val();
+        var date = $("#chosen-date").text();
+        var floor = $("#place-dropdown :selected").val();
+
+        var tfTime = $("#reserve-time").val($(this).children(".time").val());
+
+        var tfPCNo = $("#reserve-pcno").val($(this).parent().children(".pc-number").children(".pcnum").val());
+
+        console.log(time);
+        console.log($(this).parent().children(".pc-number").children(".pcnum").val());
+        console.log(floor);
+
+
+
+        //            clicked++;
+        //        }
+
+    });
+    /*
+    $(document).on("change", "#place-dropdown", function(){
+        $("#view-floor").val($("#place-dropdown :selected").val());
+        console.log($("#view-floor").val());
+        $("#view-form").submit();
+    });
+    */
+
+    $(document).on("click", ".rButton",function(){
+        location.href = 'reserve-home-admin.html';
+    });
+
+    $(document).on("click", ".aButton",function(){
+        location.href = 'reserve-analytics.html';
+    });
+
+
+    function filldeleteform(pcno, date, time){
+    	var inputPcNo = $("#remove-pcno").val(pcno);
+        var inputTime = $("#remove-time").val(time);
+        var inputDate = $("#remove-date").val(date);
+    //
+//        alert($("#remove-pcno").val());
+//        alert($("#remove-time").val());
+//        alert($("#remove-date").val());
+
+        $("#remove-form").submit();
+    }
+
+
 });
