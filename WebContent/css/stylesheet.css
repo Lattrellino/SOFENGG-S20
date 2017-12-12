@@ -11,7 +11,7 @@ h1 {
     text-align: center;
     vertical-align: middle;
     font-size: 250%;
-    margin-top: 3.8%;
+    margin-top: 2%;
     color: darkgreen;
     text-shadow: 3px 3px 0px rgba(0,0,0,0.2);
     letter-spacing: 4pt;
@@ -55,9 +55,9 @@ section {
     background-image: linear-gradient(180deg, rgba(245, 247, 250, 0.85) 0%, rgba(195, 207, 226, 0.85) 100%); 
 }
 
-.black-tint {
+.black-tint-small {
     z-index: 2;
-    height: 70%;
+    height: 60%;
     width: 100%;
     position: fixed;
     top: 15%;
@@ -65,10 +65,28 @@ section {
     background: rgba(0, 0, 0, .24);    
 }
 
+.black-tint-small > p {
+    color: white;
+    font-size: 20pt;
+    margin: 2%;
+    text-align: center;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+}
+
+.black-tint {
+    z-index: 2;
+    height: 94.5%;
+    width: 100%;
+    position: fixed;
+    top: 14%;
+    left: 0px;
+    background: rgba(0, 0, 0, .24);    
+}
+
 .black-tint > p {
     color: white;
     font-size: 20pt;
-    margin: 3%;
+    margin: 2%;
     text-align: center;
     text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
 }
@@ -79,11 +97,11 @@ section {
     vertical-align: middle;
     padding: 15px;
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 0, 0.15);
-    border-radius: 5px;
+    /*    border-radius: 5px;*/
     border-style: hidden;
 }
 
@@ -91,13 +109,13 @@ section {
     display: block;
     margin-bottom: 5%;
     font-size: 20pt;
-    border-radius: 5px;
-    border-style: hidden;
+    /*    border-radius: 5px;*/
+    /*    border-style: hidden;*/
     box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.25);
 }
 
 .button {
-    border-radius: 5px;
+    /*    border-radius: 5px;*/
     color: white;
     font-size: 20px;
     background-color: darkgreen;
@@ -132,11 +150,16 @@ section {
 
 .left-sidebar{
     position: relative;
-    width: 75%;
+    width: 30%;
     height: inherit;
     align-content: center;
-    display: inline-block;
+    display:inline-block;
     margin: 1%;
+}
+
+.left-sidebar > h2 {
+    margin-bottom: 1%;
+    margin-top: 1%;
 }
 
 .place-dropdown{
@@ -148,10 +171,11 @@ section {
 .navbar {
     background: black;
     position: fixed;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     width: 100%;
     cursor:default;
+    z-index: 1;
 }
 
 .navbar ul {
@@ -167,6 +191,7 @@ section {
     margin-right: 10px;
     color: white;
 }
+
 
 .navbar li a {
     display: inline-block;
@@ -185,15 +210,52 @@ section {
     text-decoration: none;
 }
 
-/*
-#logout-button {
-    transition: ease .5s;
+
+/*********** Current Booking Thing CSS ***********/
+
+.current-bookings {
+    margin-top: 10px;
+    padding: 2%;
+    width: 50%;
+    border: 1px solid gray;
+    background-color: rgba(255,255,255,0.3);
+    overflow: scroll;
 }
-*/
+
+.current-bookings > span {
+    font-weight: bold;
+}
+
+.current-bookings > div{
+    display: block;
+    font-size: 15px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.50);
+    margin: 2%;
+    padding: 3%;
+    transition: 0.5s ease-in;
+}
+
+.current-booking-links {
+    color: dodgerblue;
+    cursor: pointer;
+}
+
+.current-booking-links > span{
+    position: relative;
+    left: 60%;
+    text-decoration: underline;
+    margin-right: 3%;
+}
+
+.current-booking-links > span:hover{
+    color: darkslategray;
+}
+
 
 #logout-button:hover a {
     cursor: pointer;
-/*    background-color: rgba(0, 177, 255, 0.46);*/
+    /*    background-color: rgba(0, 177, 255, 0.46);*/
     color: rgba(0, 177, 255, 1);
 }
 
@@ -241,6 +303,7 @@ ul {
     padding-left: 2px;
     padding-bottom: 2px;
     cursor: pointer;
+    display: inline-block;
 }
 
 #prev-month:hover{
@@ -283,6 +346,10 @@ ul {
     cursor: pointer;
 }
 
+.day {
+
+}
+
 #days li {
     list-style-type: none;
     display: inline-block;
@@ -293,15 +360,18 @@ ul {
     color:#777;
 
 }
-.day{
-	
-}
 
 .hidden {
-	display:none;
+    display:none;
 }
+
 #current-day{
     background-color: rgba(0, 177, 255, 0.46);
+    color: white !important;
+}
+
+#current-day-inactive{
+    background-color: gray;
     color: white !important;
 }
 
@@ -312,6 +382,35 @@ ul {
     letter-spacing: 3px;
     text-align: center;
 }
+
+#submit_button {
+    color: white;
+    font-size: 20px;
+    background-color: darkgreen;
+    border-style: hidden;
+    padding: 10px 20px 10px 20px;
+    outline: none;
+    margin-top: 1%;
+    width: 20%;
+    position: relative;
+    left: 80%;
+    cursor: pointer;
+}
+
+#cancel_button {
+    color: white;
+    font-size: 20px;
+    background-color: firebrick;
+    border-style: hidden;
+    padding: 10px 20px 10px 20px;
+    outline: none;
+    margin-top: 1%;
+    width: 20%;
+    position: relative;
+    left: 80%;
+    cursor: pointer;
+}
+
 
 /*********** PC Details Table CSS ***********/
 
@@ -331,20 +430,28 @@ td {
 
 .available-pc {
     background-color: green;
-	
+
 }
 .available-pc:hover {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .unavailable-pc {
+    color: white !important;
     background-color: dimgray;
 }
+
+.selected-pc {
+    background-color: rgba(0, 177, 255, 0.46);
+    color: white !important;
+}
+
+/*********** Legend CSS ***********/
 
 .legend {
     margin-top: 10px;
     padding: 1%;
-    width: 20%;
+    width: 52%;
     border: 1px solid gray;
     background-color: rgba(255,255,255,0.3);
 }
@@ -352,8 +459,7 @@ td {
 .legend-table {
     text-align: left;
     background-color: transparent;
-    width: auto;
-    height: auto
+    width: 100%;
 }
 
 .legend-td {
@@ -361,4 +467,151 @@ td {
     margin: 1%;
     padding: 2%;
     width: 3%;
+}
+
+.booking-details{ 
+    margin-top: 10px;
+    padding: 1%;
+    width: 97.9%;
+    border: 1px solid gray;
+    background-color: rgba(255,255,255,0.3);
+}
+
+.booking-details p {
+    display: inline-flex;
+}
+
+.booking-details input {
+    display: inline-flex;
+    margin: 1%;
+}
+
+#reserve-button {
+    display: block;
+    position: relative;
+    left: 10%;
+}
+
+
+/*********** Admin Analytics Screen CSS ***********/
+
+.black-tint-admin {
+    z-index: 2;
+    height: 80%;
+    width: 100%;
+    position: fixed;
+    top: 15%;
+    left: 0px;
+    background: rgba(0, 0, 0, .24);    
+}
+
+.switchContainer{
+    text-align: center;
+    margin-top: 70px;
+}
+
+.rButton{
+    background: darkgreen;
+    color: aliceblue;
+    margin-right:20px;
+    font-size: 18px;
+}
+
+.aButton{
+    background: darkgreen;
+    color: aliceblue;
+    margin-left:20px;
+    font-size: 18px;
+}
+
+.rButton:hover, .aButton:hover{
+    cursor: pointer;
+}
+
+.sidebar-menu{
+    position: relative;
+    width: 15%;
+    height: inherit;
+    margin-top: 30px;
+    display: inline-block;
+    background: darkgreen;
+    border-color: whitesmoke;
+    border-width: 3px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-radius: 5px;
+}
+
+.chartLabel{
+    color: aliceblue;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    margin: 15px;
+    font-size: 25px;
+}
+
+.menu-items{
+    list-style: none;
+    padding-left: 0px;
+    margin-left: 0px;
+}
+
+.menu-items li{
+    color: aliceblue;
+    margin-left: 35px;
+}
+
+.menu-items li:hover{
+    color: rgba(0, 177, 255, 1);
+    cursor: pointer;
+}
+
+.sidebar-dashboards{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    align-content: center;
+    display: inline-block;
+    margin-top:30px;
+    margin-left: 50px;
+}
+
+#chartContainer{
+    width:90%; 
+    height:80%
+}
+
+#view-button {
+    visibility: hidden;
+    height: 1px;
+}
+
+
+#remove-button {
+    background-color: transparent;
+    box-shadow: none;
+    height: auto;
+    width:auto;
+    position: relative;
+    left: 90%;
+    margin: 0;
+    padding: 0;
+    color:firebrick;
+    font-size: 25px;
+
+}
+
+#remove-button:hover{
+    color: gray;
+    
+}
+
+.details {
+    padding-left: 2%;
+    padding-bottom: 4%;
+    width: 97.9%;
+    border: 1px solid gray;
+    background-color: rgba(255,255,255,0.3);   
 }
