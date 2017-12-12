@@ -559,3 +559,8 @@ td {
     width:90%; 
     height:80%
 }
+
+#view-button {
+    visibility: hidden;
+    height: 1px;
+}

@@ -33,6 +33,9 @@ function loadCalendar(){
         tempListItem = document.createElement("li");
         ulDays.appendChild(tempListItem);
     }
+    
+    $("#view-date").val(currFullYear + "-" + currMonth + "-" + currDay);
+    $("#view-button").submit();
 
     for(var dayCounter = 1; dayCounter <= currMonthDays; dayCounter++){
 
@@ -40,7 +43,7 @@ function loadCalendar(){
         tempListItem.innerHTML = dayCounter;
 
         //add a hidden element to the day that we can access when we click on it
-        var temp =  currFullYear + "/" + (currMonth + 1) + "/" + dayCounter;
+        var temp =  currFullYear + "-" + (currMonth + 1) + "-" + dayCounter;
         $(tempListItem).append("<div class = 'hidden'>" + temp + "</div>");
 
         if(dayCounter < date.getDate() && currMonth == date.getMonth()){
@@ -71,15 +74,12 @@ function initializeTopBar(){
 
     if(currMin < 10){
         currMin = "0" + currMin;
-    } else if(currHour > 10){ 
-        currHour = (currHour+11)%12+1;
-        time = "pm";
-    } else if(currHour < 10){
-        currHour = "0" + currHour;
-
-    } else {
+    }  else if(currHour < 10){
         currHour = "0" + currHour;
     } 
+    
+    if(currHour > 12)
+        time = "pm";
 
     liTime.innerHTML = currHour + ":" + currMin + time;
 
@@ -145,16 +145,6 @@ $(document).ready(function(){
         loadCalendar();
     });
 
-    //    function submitForm()
-    //    {
-    //        //String pcNo, String Date, String Time, String UserID
-    //        //TODO <INPUT TYPE="hidden" NAME="pcNo" VALUE="value1">
-    //        //<INPUT TYPE="hidden" NAME="date" VALUE="value2">
-    //        //<INPUT TYPE="hidden" NAME="time" VALUE="value2">
-    //    }
-
-    //var formPcNo, formDate, formTime, formUserId;
-    //TODO make a form that gets the day and the time and submit when button is pressed and if a new day isnt selected, get the current day
 
     $(document).on("click", ".day", function(){
         var month = $(this).children(".hidden").text().split("/")[0];
@@ -167,6 +157,8 @@ $(document).ready(function(){
         $(document.getElementById("current-day")).removeAttr("id");
         $(this).attr("id", "current-day");
         $(document.getElementById("current-day")).innerHTML = months[month-1] + " " + day + ", " + year;
+        
+        $("#view-button").submit();
 
 
     }); 
@@ -174,25 +166,23 @@ $(document).ready(function(){
     $(document).on("click", "#days li", function() {
         clicked = 0; /* TODO: updates when may reserved pc na nung day na yun. so dapat bawal magclick si user */
         var date = $(this).children(".hidden").text();
-        //    	formDate = date;
 
-        var month = $(this).children(".hidden").text().split("/")[1];
-        var day = $(this).children(".hidden").text().split("/")[2];
-        var year = $(this).children(".hidden").text().split("/")[0];
+        var month = $(this).children(".hidden").text().split("-")[1];
+        var day = $(this).children(".hidden").text().split("-")[2];
+        var year = $(this).children(".hidden").text().split("-")[0];
 
         var chosenDateText = document.getElementById("chosen-date");
-
-        console.log("DATE: " + date);
-
+        
         $(document.getElementById("current-day")).attr("id", "current-day-inactive");
 
         $(document.getElementById("current-day")).removeAttr("id");
         $(this).attr("id", "current-day");
         $(this).attr("value", year + "-" + months[month-1] + "-" + day);
 
-        alert($(this).text());
-
         chosenDateText.innerHTML = months[month-1] + " " + day + ", " + year;
+        
+        $("#view-date").val(date);
+        console.log( $("#view-date").val());
 
     });
 
@@ -265,7 +255,7 @@ $(document).ready(function(){
     });
 
     $(document).on("click", ".available-pc", function(){
-        if(clicked < 2){
+//        if(clicked < 2){
             var form = $(".pc-booking-info");
             var time = $(this).children(".time").val();
             var pcNo = $(this).parent().children(".pc-number").children(".pcnum").val();
@@ -282,8 +272,15 @@ $(document).ready(function(){
 
 
 
-            clicked++;
-        }
+//            clicked++;
+//        }
 
     });
+    
+    $(document).on("change", "#place-dropdown", function(){
+        $("#view-floor").val($("#place-dropdown :selected").val());
+        console.log($("#view-floor").val());
+        $("#view-button").submit();
+    });
+        
 });

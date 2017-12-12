@@ -39,13 +39,20 @@
 
                 <h2 id="chosen-date"> Chosen Date</h2>
 
+                <form action="/sofengg/view" method="POST">
+
+                    <input type="hidden" name="view-floor" id="view-floor" value="7">
+                    <input type="hidden" name="view-date" id="view-date" value=" ">
+                    <input type="submit" class = "button" id="view-button" value="View">
+                </form>
+
                 <select id="place-dropdown" name="Place">
-                    <option value="7th-Floor"> 7th Floor</option>
-                    <option value="8th-Floor"> 8th Floor</option>
-                    <option value="9th-Floor"> 9th Floor</option>
-                    <option value="10th-Floor"> 10th Floor</option>
-                    <option value="11th-Floor"> 11th Floor</option>
-                    <option value="12th-Floor"> 12th Floor</option>
+                    <option value="7"> 7th Floor</option>
+                    <option value="8"> 8th Floor</option>
+                    <option value="9"> 9th Floor</option>
+                    <option value="10"> 10th Floor</option>
+                    <option value="11"> 11th Floor</option>
+                    <option value="12"> 12th Floor</option>
                 </select> 
 
                 <!-- calendar -->
@@ -80,12 +87,6 @@
                 <!-- TODO Complete form action -->
                 <span> Current Booking(s): </span>
                 <div class="current-bookings">
-
-                    <form action="/sofengg/view" method="POST">
-                        <input type="text" name="view-floor">
-                        <input type="text" name="view-date">
-                        <input type="submit" class = "button" value="View">
-                    </form>
 
                     <!-- If wala pang PC na na-reserve: -->
                     <div id="no-pc"> No PCs reserved for today.</div>
