@@ -53,11 +53,8 @@ public class Database {
 	public static List<pc_database> getAllPCs() {
 
 		List<pc_database> pcs = null;
-
 		EntityManager em = emf.createEntityManager();
-
 		EntityTransaction trans = em.getTransaction();
-
 		// update object into db
 
 		try {
@@ -76,10 +73,8 @@ public class Database {
 		}
 
 		return pcs;
-
 	}
-	
-	
+
 	public static log_database getLog(int id) {
 		log_database logDB = null;
 		EntityManager em = emf.createEntityManager();
@@ -89,15 +84,66 @@ public class Database {
 		logDB = em.find(log_database.class, id);
 		trans.commit();
 		
-
 		em.close();
 		
 		return logDB;
-		
 	}
 	
+	//Gets the PCs in a specific floor
+	public static List<pc_database> getPCsOnFloor(int floor) {
+
+		List<pc_database> pcs = null;
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction trans = em.getTransaction();
+
+		try {
+			trans.begin();
+			
+			Query query =  em.createQuery("select u from pc u where u.floor = :floor");
+			query.setParameter("floor", floor);
+			
+			pcs = query.getResultList();
+			trans.commit();
+		} catch (Exception e) {
+			if (trans != null) {
+				trans.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			em.close();
+		}
+		
+		return pcs;
+	}
 	
-	
+	//Gets the logs of a certain user that are still upcoming
+	public static List<log_database> getLogsOfUser(int userId, String currentDate) {
+
+		List<log_database> logs = null;
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction trans = em.getTransaction();
+
+		try {
+			trans.begin();
+			
+			Query query =  em.createQuery("select u from log u where u.userId = :user_id and u.date >= :date");
+			query.setParameter("user_id", userId);
+			query.setParameter("date", Date.valueOf(currentDate));
+			
+			logs = query.getResultList();
+			trans.commit();
+		} catch (Exception e) {
+			if (trans != null) {
+				trans.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			em.close();
+		}
+		
+		return logs;
+	}
+		
 //----------------------------------------------------------------Log In  Funtion-----------------------------------------------------//	
 	
 	public static user_database login(String username, String password) {
@@ -131,13 +177,8 @@ public class Database {
 		}
 	}
 	
-	
-	
-	
 //----------------------------------------------------------Admin's Controller function----------------------------------------------------//
 	
-	
-	//=============================================Check PC======================================================//
 	
 	public static boolean checkIfPcAvailable(String PcNo) {
 		
@@ -173,161 +214,47 @@ public class Database {
 		
 	}
 	
-	//======================================================check time is available================================================//
-	
-	//--------------------------------------( StartTime, EndTime, DateTime)
-	public static boolean checkIfTimeIsAvail(int pc_no, String time, String date ) {
+	//checks if pc is available at this time
+	public static boolean checkIfTimeIsAvail(int pc_no, String time, String date) {
 		EntityManager em = emf.createEntityManager();
 		try {
-			
-			Query query =  em.createQuery("select u from log u where u.pcNo = :pc_no and u.date = :date and u.Time = :time");
-			query.setParameter("pc_no", pc_no);
-			System.out.println(Time.valueOf(time).toString());
-			query.setParameter("time", Time.valueOf(time));
-			query.setParameter("date", Date.valueOf(date));
-
-			//
-			//If there is result this means the time user choose is already reserved
-			//
-			
-			
-			//
-			//check to be sure
-			//
-			
-			log_database temp = (log_database) query.getSingleResult();
-			if(temp != null) {
-			System.out.println("Conflict");
-			
-			return false;
-			
+				//query block
+				Query query =  em.createQuery("select u from log u where u.pcNo = :pc_no and u.date = :date and u.Time = :time");
+				query.setParameter("pc_no", pc_no);
+				query.setParameter("time", Time.valueOf(time));
+				query.setParameter("date", Date.valueOf(date));
+				
+				//conflict block
+				log_database temp = (log_database) query.getSingleResult();
+				if(temp != null) {
+				System.out.println("Conflict");
+				return false;
 			}
 			
-			
 		}catch(NoResultException e){
-			
+			//no conflict block
 			System.out.println("No Conflict");
-			
-			return true;
-			
+			return true;		
 		}
 		
-		//
-		//there will be some problem if the program actually reach this 
-		//
+		//big problem
 		System.out.println("Welp");
-		return false;
-//OLD method if YOU WANT TO GO BACK
-//		
-//		try {
-//			
-//			//
-//			//Please check the date in mysql if correct
-//			//
-//			//==============Check if there is conflict in between time==========//
-//		Query query =  em.createQuery("select u from log u where u.date_time = :DateTime and u.start_time >= :StartTime and u.end_time <= :StartTime2 and .start_time >= :EndTime and u.end_time <= :EndTime2");
-//		query.setParameter("DateTime", DateTime);
-//		
-//		query.setParameter("StartTime", StartTime);
-//		query.setParameter("StartTime2", StartTime);
-//		
-//		query.setParameter("EndTime", EndTime);
-//		query.setParameter("EndTime2", EndTime);
-//		
-//		//
-//		//
-//		//Check just to be sure that the result isn't null
-//		//
-//		//
-//			log_database temp = (log_database) query.getSingleResult();
-//			if(temp != null) {
-//				
-//				System.out.println("In between time");
-//				return false;
-//			}else {
-//				//
-//				//
-//				//The Program should not have been here
-//				//
-//				//
-//				
-//				System.out.println("There is error");
-//				
-//				return true;
-//			}
-//			
-//			
-//			
-//		} catch (NoResultException e) {
-//			//
-//			//
-//			//The time is not in between the reserve time
-//			//
-//			//
-//		}
-//		
-//		//
-//		//
-//		//Check if the time is valid
-//		//
-//		//if the reserved time is in betweeen the start time and end time (inavlid)
-//		//
-//		//
-//		try {
-//				Query query =  em.createQuery("select u from log u where u.date_time = :DateTime and u.start_time <= :StartTime and u.end_time >= :EndTime ");
-//				query.setParameter("DateTime", DateTime);
-//				
-//				query.setParameter("StartTime", StartTime);
-//				query.setParameter("EndTime", EndTime);
-//				
-//				
-//				log_database temp = (log_database) query.getSingleResult();
-//				if(temp != null) {
-//					
-//					System.out.println("the reserved time is In between the desired time");
-//					return false;
-//				}else {
-//					//
-//					//
-//					//The Program should not have been here
-//					//
-//					//
-//					
-//					System.out.println("There is error");
-//					
-//					return false;
-//				}
-//				
-//				
-//				
-//		}catch(NoResultException e) {
-//			//
-//			//
-//			//There are no conflict 
-//			//To be sure please check the database
-//			//
-//			//
-//			System.out.println("The desired time is available");
-//			
-//			return true;
-//			
-//		}
-//		
-//		
-		
+		return false;	
 	}
-
+	
+	//reserves slot/adds a log
 	public static void reserveSlot(String pcNo, String Date, String Time, String UserID) {
 		// TODO Auto-generated method stub
 		EntityManager em = emf.createEntityManager();
 		System.out.println(pcNo + "|" + Date +"|" + Time + "|" + UserID);
 		EntityTransaction et = em.getTransaction();
 		et.begin();
-		em.createNativeQuery("INSERT INTO log (pc_no,date,time,user_id) " + "VALUES (" + pcNo + "," + Date + "," + Time + "," + UserID +")").executeUpdate();
+		em.createNativeQuery("INSERT INTO log (pc_no,date,time,user_id) " + "VALUES ('" + pcNo + "','" + Date + "','" + Time + "','" + UserID +"')").executeUpdate();
 		et.commit();
 	}
 	
-	public static void removeLog(String pcNo, String Date, String Time, String UserID) //you can only remove a reserved slot so instead of editing anything just remove it so he can book again
+	//deletes the log
+	public static void removeLog(String pcNo, String Date, String Time, String UserID) 
 	{
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction et = em.getTransaction();
@@ -341,18 +268,13 @@ public class Database {
 		et.commit();
 	}
 	
-		
-	
 	//========================================================Check The peak hours===============================================================//
 	
 	public static String checkPeakHours(String date) {
 		
 		EntityManager em = emf.createEntityManager();
 		String temp = "00:00:00";
-		
-
-		
-		
+			
 		try {
 //			select *,count(time)
 //			from log
@@ -380,24 +302,16 @@ public class Database {
 			em.close();
 		}
 		
-		
-		return temp;
-		
-		
+		return temp;	
 	}
 	
-	
 //=============================================================Check most reserved PC all time=========================================//
-	
 	
 	public static int checkMostReserved() {
 		
 		EntityManager em = emf.createEntityManager();
 		int temp = 0;
-		
 
-		
-		
 		try {
 //			select *, count(pc_no)
 //			from log
@@ -405,9 +319,7 @@ public class Database {
 //			order by count(pc_no) desc
 //			;
 
-			
 		Query query =  em.createQuery("select u from log as u group by u.pc_no order by count(u.pc_no) desc");
-		
 		
 			log_database user = (log_database) query.getSingleResult();
 			temp = user.getPcNo();
@@ -419,22 +331,14 @@ public class Database {
 			
 		} catch (NoResultException | NumberFormatException e) {
 			System.out.println("No result");
-
 		} finally {
 			em.close();
 		}
 		
-		
-		return temp;
-		
-		
+		return temp;	
 	}
 	
-	
-	
-	
-	
-	
-	
-
+	public static void main(String[] args){
+		reserveSlot("7", "2017-12-12", "7:00:00", "11311313");
+	}
 }

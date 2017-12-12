@@ -34,25 +34,7 @@ public class LogIn extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		request.getRequestDispatcher("index.html").forward(request, response);
-								//		HttpSession session = request.getSession();
-								//		session.setAttribute("photoBase", PhotoDatabase.photoBase);
-								//		session.setAttribute("pictureBase", PhotoServices.getAllPublicPictures());
-								//		
-								//		if(request.getParameter("loadNum") != null)
-								//			request.setAttribute("loadNum", request.getParameter("loadNum"));
-								//		else{
-								//			request.setAttribute("loadNum", "0");
-								//		}
-								//		Cookie[] cookies = request.getCookies();
-								//		if(cookies != null){
-								//			for (Cookie cookie : cookies) {
-								//				if (cookie.getName().equals("user")) {						//
-								//					session.setAttribute("user", cookie.getValue());		//
-								//			    }
-								//			}
-//										}
 		
 	}
 
@@ -60,53 +42,40 @@ public class LogIn extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
-//-----------------------------set variable--------------------------//	
+		//-----------------------------set variable--------------------------//	
 		
 		String username = request.getParameter("id-number");
+		String password =(String) request.getParameter("password");		
 		
-//		System.out.println( request.getParameter("username"));
-//		System.out.println( request.getParameter("password"));
-		
-		String password =(String) request.getParameter("password");
-//		String rememberMe = request.getParameter("rememberMe");
-		
-		
-//-----------------------------==checking==--------------------------//	
-		
-		//---------------admin-----------------------//
-		
-		//if( password == "admin123")
-		//	response.sendRedirect("/sofengg/Admin_Controller");
-		
-		
-		//-------------------normal user--------------//
+		//-----------------------------==checking==--------------------------//	
 			
-			user_database person = Database.login(username, password);
-			if (person != null) {
-				
-				// save person to session
-				// you can also do getSession().setAttribute instead of getting
-				// HttpSession object first before setting attribute
-				
-				request.getSession().setAttribute("person", person);
-				
-				//get current date
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-				Date date = new Date();
-				request.getSession().setAttribute("current-day", dateFormat.format(date));
-				// redirect to secured page
-				
-				response.sendRedirect("/sofengg/Admin_Controller");
-				System.out.println("login dopost");
-			} else {
-				System.out.println("login dopost");
+		user_database person = Database.login(username, password);
+		if (person != null) {
+			request.getSession().setAttribute("person", person);
+			
+			//get current date
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = new Date();
+			request.getSession().setAttribute("current-day", dateFormat.format(date));
+			System.out.println(dateFormat.format(date));
+			
+			//set selected date as current date
+			request.getSession().setAttribute("selected-day", dateFormat.format(date));
+			
+			//set floor to display
+			request.getSession().setAttribute("selected-floor", 7);
+			
+			// redirect to secured page
+			System.out.println("login dopost");
+			response.sendRedirect("/sofengg/Admin_Controller");
+		} 
+		
+		else {
+			System.out.println("login dopost");
 			response.sendRedirect("/sofengg/LogInController");
-			
 		}
-		
-//		
+			
 	}
 
 }
