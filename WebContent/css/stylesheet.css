@@ -564,3 +564,31 @@ td {
     visibility: hidden;
     height: 1px;
 }
+
+
+#remove-button {
+    background-color: transparent;
+    box-shadow: none;
+    height: auto;
+    width:auto;
+    position: relative;
+    left: 90%;
+    margin: 0;
+    padding: 0;
+    color:firebrick;
+    font-size: 25px;
+
+}
+
+#remove-button:hover{
+    color: gray;
+    
+}
+
+.details {
+    padding-left: 2%;
+    padding-bottom: 4%;
+    width: 97.9%;
+    border: 1px solid gray;
+    background-color: rgba(255,255,255,0.3);   
+}
