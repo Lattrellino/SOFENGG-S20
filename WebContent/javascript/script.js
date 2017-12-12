@@ -33,10 +33,9 @@ function loadCalendar(){
         tempListItem = document.createElement("li");
         ulDays.appendChild(tempListItem);
     }
-    
-    $("#view-date").val(currFullYear + "-" + currMonth + "-" + currDay);
-    $("#view-form").submit();
 
+    $("#view-date").val(currFullYear + "-" + currMonth + "-" + currDay);
+    //   
     for(var dayCounter = 1; dayCounter <= currMonthDays; dayCounter++){
 
         tempListItem = document.createElement("li");
@@ -58,6 +57,9 @@ function loadCalendar(){
             $(tempListItem).attr("id", "current-day");
 
         ulDays.appendChild(tempListItem);
+
+        //         $("#view-form").submit();
+
     }
 
 }
@@ -77,7 +79,7 @@ function initializeTopBar(){
     }  else if(currHour < 10){
         currHour = "0" + currHour;
     } 
-    
+
     if(currHour > 12)
         time = "pm";
 
@@ -157,8 +159,8 @@ $(document).ready(function(){
         $(document.getElementById("current-day")).removeAttr("id");
         $(this).attr("id", "current-day");
         $(document.getElementById("current-day")).innerHTML = months[month-1] + " " + day + ", " + year;
-        
-        $("#view-button").submit();
+
+        $("#view-form").submit();
 
 
     }); 
@@ -172,7 +174,7 @@ $(document).ready(function(){
         var year = $(this).children(".hidden").text().split("-")[0];
 
         var chosenDateText = document.getElementById("chosen-date");
-        
+
         $(document.getElementById("current-day")).attr("id", "current-day-inactive");
 
         $(document.getElementById("current-day")).removeAttr("id");
@@ -180,7 +182,7 @@ $(document).ready(function(){
         $(this).attr("value", year + "-" + months[month-1] + "-" + day);
 
         chosenDateText.innerHTML = months[month-1] + " " + day + ", " + year;
-        
+
         $("#view-date").val(date);
         console.log( $("#view-date").val());
 
@@ -255,32 +257,54 @@ $(document).ready(function(){
     });
 
     $(document).on("click", ".available-pc", function(){
-//        if(clicked < 2){
-            var form = $(".pc-booking-info");
-            var time = $(this).children(".time").val();
-            var pcNo = $(this).parent().children(".pc-number").children(".pcnum").val();
-            var date = $("#chosen-date").text();
-            var floor = $("#place-dropdown :selected").text();
+        //        if(clicked < 2){
+        var form = $(".pc-booking-info");
+        var time = $(this).children(".time").val();
+        var pcNo = $(this).parent().children(".pc-number").children(".pcnum").val();
+        var date = $("#chosen-date").text();
+        var floor = $("#place-dropdown :selected").val();
 
-            var tfTime = $("#reserve-time").val($(this).children(".time").val());
+        var tfTime = $("#reserve-time").val($(this).children(".time").val());
 
-            var tfPCNo = $("#reserve-pcno").val($(this).parent().children(".pc-number").children(".pcnum").val());
+        var tfPCNo = $("#reserve-pcno").val($(this).parent().children(".pc-number").children(".pcnum").val());
 
-            console.log(time);
-            console.log($(this).parent().children(".pc-number").children(".pcnum").val());
-            console.log(floor);
+        console.log(time);
+        console.log($(this).parent().children(".pc-number").children(".pcnum").val());
+        console.log(floor);
 
 
 
-//            clicked++;
-//        }
+        //            clicked++;
+        //        }
 
     });
-    
+
     $(document).on("change", "#place-dropdown", function(){
         $("#view-floor").val($("#place-dropdown :selected").val());
         console.log($("#view-floor").val());
         $("#view-form").submit();
     });
+
+    $("#remove-button").on("click", function(){
+        var pcNo = $("#remove-pcno").val($(".booked-pcno").attr("id"));
+        var time = $("#remove-time").val($(".booked-time").attr("id"));
         
+        var floor = $("#place-dropdown :selected").val();
+
+        console.log($("#remove-pcno").val());
+        console.log($("#remove-time").val());
+
+        $("#remove-form").submit();
+
+    });
+    
+    function filldeleteform(pcno, date, time){
+        var pcNo = $("#remove-pcno").val(pcno);
+        var time = $("#remove-time").val(time);
+        var date = $("#remove-date").val(date);
+        
+        $("#remove-form").submit();
+    }
+
+
 });
