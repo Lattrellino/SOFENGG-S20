@@ -284,19 +284,15 @@ $(document).ready(function(){
         console.log($("#view-floor").val());
         $("#view-form").submit();
     });
-
-    $("#remove-button").on("click", function(){
-        var pcNo = $("#remove-pcno").val($(".booked-pcno").attr("id"));
-        var time = $("#remove-time").val($(".booked-time").attr("id"));
-        
-        var floor = $("#place-dropdown :selected").val();
-
-        console.log($("#remove-pcno").val());
-        console.log($("#remove-time").val());
-
-        $("#remove-form").submit();
-
+    
+    $(document).on("click", ".rButton",function(){
+        location.href = 'reserve-home-admin.html';
     });
+    
+    $(document).on("click", ".aButton",function(){
+        location.href = 'reserve-analytics.html';
+    });
+      
     
     function filldeleteform(pcno, date, time){
         var pcNo = $("#remove-pcno").val(pcno);

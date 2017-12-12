@@ -78,7 +78,7 @@ section {
     height: 94.5%;
     width: 100%;
     position: fixed;
-    top: 5.5%;
+    top: 14%;
     left: 0px;
     background: rgba(0, 0, 0, .24);    
 }
@@ -503,6 +503,29 @@ td {
     top: 15%;
     left: 0px;
     background: rgba(0, 0, 0, .24);    
+}
+
+.switchContainer{
+    text-align: center;
+    margin-top: 70px;
+}
+
+.rButton{
+    background: darkgreen;
+    color: aliceblue;
+    margin-right:20px;
+    font-size: 18px;
+}
+
+.aButton{
+    background: darkgreen;
+    color: aliceblue;
+    margin-left:20px;
+    font-size: 18px;
+}
+
+.rButton:hover, .aButton:hover{
+    cursor: pointer;
 }
 
 .sidebar-menu{
