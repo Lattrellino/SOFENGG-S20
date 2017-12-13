@@ -34,7 +34,7 @@ var currDay, currMonth, currFullYear, date, viewDate;
     	        ulDays.appendChild(tempListItem);
     	    }
 
-    	    $("#view-date").val(currFullYear + "-" + currMonth + "-" + currDay);
+    	    $("#view-date").val(currFullYear + "-" + (currMonth + 1) + "-" + currDay);
     	    //   
     	    for(var dayCounter = 1; dayCounter <= currMonthDays; dayCounter++){
 
@@ -93,7 +93,7 @@ var currDay, currMonth, currFullYear, date, viewDate;
     	        ulDays.appendChild(tempListItem);
     	    }
 
-    	    $("#view-date").val(year + "-" + month + "-" + day);
+    	   $("#view-date").val(year + "-" + (month + 1) + "-" + day);
     	    //   
     	    for(var dayCounter = 1; dayCounter <= currMonthDays; dayCounter++){
 
@@ -279,7 +279,10 @@ var currDay, currMonth, currFullYear, date, viewDate;
 
     	        chosenDateText.innerHTML = months[month-1] + " " + day + ", " + year;
 
-    	        $("#view-date").val(date);
+    	        month = month + 1;
+    	        var floorDate = year + "" + month + "" + day;
+    	        console.log(floorDate);
+    	        $("#view-date").val(floorDate);
     	        console.log( $("#view-date").val());
     	        $("#view-form").submit();
 
