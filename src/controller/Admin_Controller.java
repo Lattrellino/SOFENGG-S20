@@ -66,7 +66,10 @@ public class Admin_Controller extends HttpServlet {
 		for(log_database log : logs)
 			System.out.println(log.getLogID());
 		
-		request.getRequestDispatcher("reserve-home.jsp").forward(request, response);
+		if(person.getType() == 0)
+			request.getRequestDispatcher("reserve-home-admin.jsp").forward(request, response);
+		else
+			request.getRequestDispatcher("reserve-home.jsp").forward(request, response);
 	}
 
 	/**
