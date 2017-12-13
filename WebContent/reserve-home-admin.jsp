@@ -923,6 +923,14 @@
             <div class="tint"></div>
 
         </div>
+         <div class="switchContainer">
+			<form action="/sofengg/Admin_Controller" id="view-form" method="POST">
+				<input type="submit" class= "rButton" id="remove-submit" value="Reservation">
+            </form>
+            <form action="/sofengg/analytics" id="view-form" method="POST">
+            <input type="submit" class= "aButton" id="remove-submit" value="Analytics">
+            </form>
+        </div>
 
         <section class="black-tint"> <!-- sidebar to choose resrvation details -->
 
