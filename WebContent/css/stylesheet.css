@@ -563,6 +563,11 @@ td {
     margin-left: 35px;
 }
 
+#rList{
+    font-weight: bold;
+    font-size: 18px;
+}
+
 .menu-items li:hover{
     color: rgba(0, 177, 255, 1);
     cursor: pointer;
@@ -580,7 +585,6 @@ td {
 
 #chartContainer{
     width:90%; 
-    height:80%
 }
 
 #view-button {
@@ -614,4 +618,22 @@ td {
     width: 97.9%;
     border: 1px solid gray;
     background-color: rgba(255,255,255,0.3);   
+}
+
+.rTable{
+    width: 75%;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+.rTable tr{
+    border: 1px solid black;
+}
+
+.rTable th{
+    border: 1px solid black;
+}
+
+.rTable td{
+    border: 1px solid black;
 }

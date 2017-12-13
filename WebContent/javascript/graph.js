@@ -139,3 +139,51 @@ function mrlcFunction(){
 });
     chart.render();
 }
+
+function rListFunction(){
+    document.getElementById("chartContainer").innerHTML = 
+        "<table class=\"rTable\" >" + 
+        "<tr>" + 
+        "<th>PC No.</td>" + 
+        "<th>Floor</td>" +
+        "<th>Reserve Time</td>" + 
+        "<th>Reserve Date</td>" + 
+        "</tr>" + 
+        
+        "<tr>" + 
+        "<td>7</td>" + 
+        "<td>8th</td>" +
+        "<td>09:00:00</td>" + 
+        "<td>13/12/2017</td>" + 
+        "</tr>" + 
+        
+        "<tr>" + 
+        "<td>8</td>" + 
+        "<td>8th</td>" +
+        "<td>13:00:00</td>" + 
+        "<td>13/12/2017</td>" + 
+        "</tr>" + 
+        
+        "<tr>" + 
+        "<td>3</td>" + 
+        "<td>10th</td>" +
+        "<td>20:00:00</td>" + 
+        "<td>10/12/2017</td>" + 
+        "</tr>" + 
+        
+        "<tr>" + 
+        "<td>4</td>" + 
+        "<td>7th</td>" +
+        "<td>17:00:00</td>" + 
+        "<td>9/12/2017</td>" + 
+        "</tr>" + 
+        
+        "<tr>" + 
+        "<td>2</td>" + 
+        "<td>9th</td>" +
+        "<td>14:00:00</td>" + 
+        "<td>7/12/2017</td>" + 
+        "</tr>" + 
+        
+        "</table>"
+}
