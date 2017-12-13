@@ -71,16 +71,9 @@ var currDay, currMonth, currFullYear, date, viewDate;
 
     	}
 
-    	function initializeViewTopBar(viewDate){
-    		var string = new Array();
-    	    string = viewDate.split("-");
-    	    console.log(string);
-    	    var month = string[1] - 1;
-    	    var day = string[2];
-    	    var year = string[0];
-    	    
+    	function initializeTopBar(){
     	    var liDate = document.getElementById("nav-date");
-    	    liDate.innerHTML = months[month] + " " + day + ", " + year;
+    	    liDate.innerHTML = months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
 
     	    var liTime = document.getElementById("nav-time");
 
@@ -100,6 +93,7 @@ var currDay, currMonth, currFullYear, date, viewDate;
     	    liTime.innerHTML = currHour + ":" + currMin + time;
 
     	}
+
 
     	function updateClock() {
     	    var now = new Date();
@@ -125,7 +119,7 @@ var currDay, currMonth, currFullYear, date, viewDate;
     	    console.log(hehe);
     	    var viewDate = hehe.replace(/\s/g, "");
     	    console.log(viewDate);
-    	    initializeViewTopBar(viewDate);
+    	    initializeTopBar();
     	    loadViewCalendar(viewDate);
     	    	
 
