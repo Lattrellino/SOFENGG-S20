@@ -93,7 +93,7 @@ var currDay, currMonth, currFullYear, date, viewDate;
     	        ulDays.appendChild(tempListItem);
     	    }
 
-    	   $("#view-date").val(year + "-" + (month + 1) + "-" + day);
+    	    $("#view-date").val(year + "-" + (month + 1) + "-" + day);
     	    //   
     	    for(var dayCounter = 1; dayCounter <= currMonthDays; dayCounter++){
 
@@ -278,7 +278,7 @@ var currDay, currMonth, currFullYear, date, viewDate;
     	        $(this).attr("value", year + "-" + months[month-1] + "-" + day);
 
     	        chosenDateText.innerHTML = months[month-1] + " " + day + ", " + year;
-
+    	        
     	        month = month + 1;
     	        var floorDate = year + "" + month + "" + day;
     	        console.log(floorDate);
