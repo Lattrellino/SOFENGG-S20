@@ -279,10 +279,7 @@ var currDay, currMonth, currFullYear, date, viewDate;
 
     	        chosenDateText.innerHTML = months[month-1] + " " + day + ", " + year;
     	        
-    	        month = month + 1;
-    	        var floorDate = year + "" + month + "" + day;
-    	        console.log(floorDate);
-    	        $("#view-date").val(floorDate);
+    	        $("#view-date").val(date);
     	        console.log( $("#view-date").val());
     	        $("#view-form").submit();
 
