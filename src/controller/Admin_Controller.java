@@ -47,7 +47,7 @@ public class Admin_Controller extends HttpServlet {
 		String currdate = (String) request.getSession().getAttribute("current-day");
 		String date = (String) request.getSession().getAttribute("selected-day");
 		user_database person = (user_database) request.getSession().getAttribute("person");
-		
+		System.out.println("DATE CHECK " + date);
 		//PC List for viewing the schedule
 		List<pc_database> pcs = Database.getPCsOnFloor(floor);
 		request.getSession().setAttribute("pcs", pcs);
@@ -63,6 +63,8 @@ public class Admin_Controller extends HttpServlet {
 				available[i][j] = Database.checkIfTimeIsAvail(pcs.get(i).getPcNo(), (7 + j) + ":00:00", date);
 		}
 		request.getSession().setAttribute("avail", available);
+		request.getSession().setAttribute("currdate", currdate);
+		request.getSession().setAttribute("date", date);
 		for(log_database log : logs)
 			System.out.println(log.getLogID());
 		
@@ -109,12 +111,15 @@ public class Admin_Controller extends HttpServlet {
 	
 	protected void view(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Get floor and date
+		String path = request.getServletPath();
+		System.out.println(path);
 		int viewFloor = Integer.parseInt(request.getParameter("view-floor"));
-		String viewDate = request.getParameter("view-date");
+		String selectedDay = request.getParameter("view-date");
+		System.out.println("REEE" + selectedDay);
 		//set them to session
 			request.getSession().setAttribute("selected-floor", viewFloor);
-		if(viewDate != null)
-			request.getSession().setAttribute("selected-day", viewDate);
+		if(selectedDay != null)
+			request.getSession().setAttribute("selected-day", selectedDay);
 		
 		request.getRequestDispatcher("Admin_Controller").forward(request, response);
 	}
