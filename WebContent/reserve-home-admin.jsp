@@ -592,7 +592,7 @@
 		</style>
     
     	<script>
-    	var currDay, currMonth, currYear, date;
+    	var currDay, currMonth, currYear, date, viewDate;
 
     	var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -641,7 +641,7 @@
 
     	        if(dayCounter < date.getDate() && currMonth == date.getMonth()){
     	            $(tempListItem).addClass("unvailable-pc");
-    	        } else if (currMonth != date.getMonth() && currYear < date.getYear()) {
+    	        } else if (currMonth != date.getMonth() && currFullYear < date.getYear()) {
     	            $(tempListItem).addClass("unavailable-pc");
     	        } else {
     	            $(tempListItem).attr("id", "day");
@@ -657,7 +657,96 @@
     	    }
 
     	}
+    	
+    	function loadViewCalendar(viewDate){
 
+    	    var divMonth = document.getElementById("month-name");
+    	    var ulDays = document.getElementById("days");
+    	    var spanYear = document.getElementById("year");
+    	    var currDateText = document.getElementById("chosen-date");
+    	    var tempListItem;
+    	    string = viewDate.split("-");
+    	    console.log(string);
+    	    var month = string[1] - 1;
+    	    var day = string[2];
+    	    var year = string[0];
+
+    	    var currMonthDays = new Date(year, month, 0).getDate();
+    	    var firstDay = new Date(year, month, 1).getDay();
+
+    	    var formPcNo, formDate, formTime, formUserId;
+    	    divMonth.innerHTML = months[month];
+    	    spanYear.innerHTML = year;
+    	    var string = new Array();
+    	   
+    	    formDate = year + "" + month + "" + day;
+    	    currDateText.innerHTML = months[month] + " " + day + ", " + year;
+
+    	    for(var firstDayCounter = 0; firstDayCounter < firstDay; firstDayCounter++){
+    	        tempListItem = document.createElement("li");
+    	        ulDays.appendChild(tempListItem);
+    	    }
+
+    	    $("#view-date").val(year + "-" + month + "-" + day);
+    	    //   
+    	    for(var dayCounter = 1; dayCounter <= currMonthDays; dayCounter++){
+
+    	        tempListItem = document.createElement("li");
+    	        tempListItem.innerHTML = dayCounter;
+
+    	        //add a hidden element to the day that we can access when we click on it
+    	        var temp =  year + "-" + (month + 1) + "-" + dayCounter;
+    	        $(tempListItem).append("<div class = 'hidden'>" + temp + "</div>");
+
+    	        if(dayCounter < date.getDate() && month == date.getMonth()){
+    	            $(tempListItem).addClass("unvailable-pc");
+    	        } else if (month != date.getMonth() && year < date.getYear()) {
+    	            $(tempListItem).addClass("unavailable-pc");
+    	        } else {
+    	            $(tempListItem).attr("id", "day");
+    	        }
+
+    	        if(day == dayCounter && month == date.getMonth())
+    	            $(tempListItem).attr("id", "current-day");
+
+    	        ulDays.appendChild(tempListItem);
+
+    	        //         $("#view-form").submit();
+
+    	    }
+
+    	}
+
+    	function initializeViewTopBar(viewDate){
+    		var string = new Array();
+    	    string = viewDate.split("-");
+    	    console.log(string);
+    	    var month = string[1] - 1;
+    	    var day = string[2];
+    	    var year = string[0];
+    	    
+    	    var liDate = document.getElementById("nav-date");
+    	    liDate.innerHTML = months[month] + " " + day + ", " + year;
+
+    	    var liTime = document.getElementById("nav-time");
+
+    	    var currMin = date.getMinutes();
+    	    var currHour = date.getHours();
+    	    var time = "am";
+
+    	    if(currMin < 10){
+    	        currMin = "0" + currMin;
+    	    }  else if(currHour < 10){
+    	        currHour = "0" + currHour;
+    	    } 
+
+    	    if(currHour > 12)
+    	        time = "pm";
+
+    	    liTime.innerHTML = currHour + ":" + currMin + time;
+
+    	}
+    	
     	function initializeTopBar(){
     	    var liDate = document.getElementById("nav-date");
     	    liDate.innerHTML = months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
@@ -700,16 +789,23 @@
 
     	$(document).ready(function(){    
     	    date = new Date();  
-
+    	    formDate = "";
     	    var currentWindow = window.location.href;
     	    if(currentWindow.indexOf("reserve") > 0){
     	        initializeTopBar();
     	        getCurrentDate();
     	        loadCalendar();
     	        clicked = 0;
+    	        formDate = currFullYear + "" + currMonth + "" + currDay;
     	    }
-
-    	    formDate = currYear + "" + currMonth + "" + currDay;
+    	    else{
+    	    	var hehe = $("#nav-date").text();
+    	    	console.log(hehe);
+    	    	var viewDate = hehe.replace(/\s/g, "");
+    	    	console.log(viewDate);
+    	    	initializeViewTopBar(viewDate);
+    	    	loadViewCalendar(viewDate);
+    	    }
 
     	    $("#prev-month").click(function(){
     	        console.log("prev month");
@@ -909,7 +1005,16 @@
             <ul>
                 <li id="nav-loggedin">Welcome<span id="id-num">${person.userID} </span></li>
                 <span class="divider"> | </span>
-                <li><span id="nav-date">${currdate}  </span></li>
+                <li><span id="nav-date">
+			<c:choose>
+				<c:when test="${empty date}">
+					${currdate}
+				</c:when>
+				<c:otherwise>
+					${date}
+				</c:otherwise>
+			</c:choose>
+		</span></li>
                 <li><span id="nav-time"><script type="text/javascript"></script></span></li>
                 <span class="divider"> | </span>
                 <li id="logout-button"><a href="index.html">Logout</a></li>
@@ -936,7 +1041,16 @@
 
             <section class="left-sidebar"> <!-- dropdown to select the floor -->
 
-                <h2 id="chosen-date"> Chosen Date</h2>
+                <h2 id="chosen-date">
+			<c:choose>
+				<c:when test="${empty date}">
+					${currdate}
+				</c:when>
+				<c:otherwise>
+					${date}
+				</c:otherwise>
+			</c:choose>
+		</h2>
 
                 <form action="/sofengg/view" id="view-form" method="POST">
 
