@@ -235,10 +235,12 @@
 			.current-bookings {
 			    margin-top: 10px;
 			    padding: 2%;
-			    width: 50%;
+			    width: 90%;
+			    height: 40%;
 			    border: 1px solid gray;
 			    background-color: rgba(255,255,255,0.3);
-			    overflow: scroll;
+			    overflow-x: hidden;
+			    overflow-y: auto;
 			}
 			
 			.current-bookings > span {
@@ -903,7 +905,7 @@
             <ul>
                 <li id="nav-loggedin">Welcome<span id="id-num">${person.userID} </span></li>
                 <span class="divider"> | </span>
-                <li><span id="nav-date">Date </span></li>
+                <li><span id="nav-date">${currdate}  </span></li>
                 <li><span id="nav-time"><script type="text/javascript"></script></span></li>
                 <span class="divider"> | </span>
                 <li id="logout-button"><a href="index.html">Logout</a></li>
@@ -932,6 +934,7 @@
                 </form>
 
                 <select id="place-dropdown" name="Place">
+               		<option> Select floor</option>
                     <option value="7"> 7th Floor</option>
                     <option value="8"> 8th Floor</option>
                     <option value="9"> 9th Floor</option>
@@ -970,27 +973,19 @@
                 </div>
                 <!-- TODO Complete form action -->
                 <span> Current Booking(s): </span>
-                <div class="current-bookings">
 
-                    <!-- If wala pang PC na na-reserve: -->
-                    <!--<div id="no-pc"> No PCs reserved for today.</div> -->
-                    <!-- FORMAT -->                  
-				<form action="/sofengg/remove" method="POST" id="remove-form">
-                        <input type="hidden" name="remove-pcno" id="remove-pcno" placeholder="remove-pcno">
-                        <input type="hidden" name="remove-time" id="remove-time" placeholder="remove-time">
-                        <input type="hidden" name="remove-date" id="remove-date" placeholder="remove-date">
-					
-					<c:forEach var="log" items="${logs}" varStatus="logloop">
+                <div class="current-bookings">     
+                <c:forEach var="log" items="${logs}" varStatus="logloop">
                         <div class="details">
-                            <input type="submit" class = "button" value="x" id="remove-button" onclick="filldeleteform(${log.pcNo}, ${log.date}, ${log.time})"> 
+                            
                             <div class="booked-date" id="${log.date}">${log.date}</div>
                             <div class="booked-time" id="${log.time}">${log.time}</div>
                             <div class="booked-pcno" id="01"> PC # ${log.pcNo}</div>
                         </div>
                     </c:forEach>
-                </form>
 
                 </div>
+                
 
                 <div class="legend">
                     <span> Legend: </span>
@@ -1071,7 +1066,15 @@
                         <input type="submit" class = "button" id="reserve-button" value="Reserve">
                     </form>
                 </div>
-
+				<div class="booking-details">    
+                Cancel Reservation: 
+	                <form action="/sofengg/remove" method="POST" id="remove-form">
+	                        <p>PC No: </p><input type="text" name="remove-pcno" id="remove-pcno" placeholder="">
+	                        <p>Time: </p><input type="text" name="remove-time" id="remove-time" placeholder="HR:00:00">
+	                        <p>Date: </p><input type="text" name="remove-date" id="remove-date" placeholder="yyyy-MM-dd">
+	                        <input type="submit" id="remove-submit" value="Delete">
+	                </form>
+                </div>
             </section>
 
 
