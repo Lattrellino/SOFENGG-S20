@@ -904,7 +904,7 @@
     </head>
 
     <body>
-
+		<h1>THIS IS ADMIN!</h1>
         <section class="navbar">
             <ul>
                 <li id="nav-loggedin">Welcome<span id="id-num">${person.userID} </span></li>
