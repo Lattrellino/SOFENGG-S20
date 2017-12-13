@@ -125,7 +125,7 @@ public class Database {
 
 		try {
 			trans.begin();
-			
+			System.out.println(userId + " " + currentDate);
 			Query query =  em.createQuery("select u from log u where u.userId = :user_id and u.date >= :date");
 			query.setParameter("user_id", userId);
 			query.setParameter("date", Date.valueOf(currentDate));
@@ -259,6 +259,7 @@ public class Database {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
+		System.out.println(pcNo + "|" + Date +"|" + Time + "|" + UserID);
 		em.createNativeQuery("DELETE FROM log " +
 				"WHERE pc_no" +  " = '" + pcNo + "'" + 
 				" AND date = '" + Date + "'" + 
@@ -339,6 +340,12 @@ public class Database {
 	}
 	
 	public static void main(String[] args){
-		reserveSlot("7", "2017-12-12", "7:00:00", "11311313");
+		List<log_database> logs = getLogsOfUser(11311313, "2017-12-13");
+		for(log_database log : logs)
+			System.out.println(log.getLogID());
+		
+		String s = "17:00:00";
+		String firstInt = s.replaceFirst(".*?(\\d+).*", "$1");
+		System.out.println(Integer.parseInt(firstInt) + 1);
 	}
 }

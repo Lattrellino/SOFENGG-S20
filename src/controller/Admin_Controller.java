@@ -44,6 +44,7 @@ public class Admin_Controller extends HttpServlet {
 		}	
 		
 		int floor = (int) request.getSession().getAttribute("selected-floor");
+		String currdate = (String) request.getSession().getAttribute("current-day");
 		String date = (String) request.getSession().getAttribute("selected-day");
 		user_database person = (user_database) request.getSession().getAttribute("person");
 		
@@ -52,7 +53,7 @@ public class Admin_Controller extends HttpServlet {
 		request.getSession().setAttribute("pcs", pcs);
 		
 		//Log list for viewing the current bookings
-		List<log_database> logs = Database.getLogsOfUser(person.getUserID(), date);
+		List<log_database> logs = Database.getLogsOfUser(person.getUserID(), currdate);
 		request.getSession().setAttribute("logs", logs);
 		
 		//Finds which time slot is available
@@ -62,7 +63,8 @@ public class Admin_Controller extends HttpServlet {
 				available[i][j] = Database.checkIfTimeIsAvail(pcs.get(i).getPcNo(), (7 + j) + ":00:00", date);
 		}
 		request.getSession().setAttribute("avail", available);
-		
+		for(log_database log : logs)
+			System.out.println(log.getLogID());
 		
 		request.getRequestDispatcher("reserve-home.jsp").forward(request, response);
 	}
@@ -91,13 +93,13 @@ public class Admin_Controller extends HttpServlet {
 	protected void remove(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//get person and selected day from session
 		user_database person = (user_database) request.getSession().getAttribute("person");
-		String selectedDay = (String) request.getSession().getAttribute("selected-day");
 		
 		//get pcno and time from form
 		String deletePcNo = request.getParameter("remove-pcno");
+		String deleteDate = request.getParameter("remove-date");
 		String deleteTime = request.getParameter("remove-time");
 		
-		Database.removeLog(deletePcNo, selectedDay, deleteTime, person.getUserID() + "");
+		Database.removeLog(deletePcNo, deleteDate, deleteTime, person.getUserID() + "");
 		
 		request.getRequestDispatcher("Admin_Controller").forward(request, response);
 	}
@@ -106,10 +108,10 @@ public class Admin_Controller extends HttpServlet {
 		//Get floor and date
 		int viewFloor = Integer.parseInt(request.getParameter("view-floor"));
 		String viewDate = request.getParameter("view-date");
-		
 		//set them to session
-		request.getSession().setAttribute("selected-floor", viewFloor);
-		request.getSession().setAttribute("selected-day", viewDate);
+			request.getSession().setAttribute("selected-floor", viewFloor);
+		if(viewDate != null)
+			request.getSession().setAttribute("selected-day", viewDate);
 		
 		request.getRequestDispatcher("Admin_Controller").forward(request, response);
 	}
